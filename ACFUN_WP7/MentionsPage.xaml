@@ -1,0 +1,107 @@
+﻿<phone:PhoneApplicationPage 
+    xmlns:Toolkit="clr-namespace:Liubaicai.Toolkit;assembly=Liubaicai.Toolkit.EasyListBox" 
+    xmlns:ACFUN="clr-namespace:ACFUN"
+    x:Class="ACFUN.MentionsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity="0">
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="MentionsDataTemplate">
+            <Grid Width="456" Margin="0,0,0,10">
+                <StackPanel>
+                    <Grid Margin="0,0,0,5">
+                        <TextBlock FontSize="18" Text="[主题]" HorizontalAlignment="Left" Height="22" Width="50" Foreground="#FF5CB65C"/>
+                        <HyperlinkButton Tag="{Binding href}"  Foreground="#FF5CB65C" FontSize="18" Content="{Binding title}" Click="title_Click" MaxHeight="48" Margin="38,0,-12,0" HorizontalAlignment="Left" FontFamily="DengXian"/>
+                    </Grid>
+                    <Grid Visibility="{Binding isShowP}" Background="#FF131313" Margin="10,0">
+                        <StackPanel Margin="0,5" Width="416">
+                            <TextBlock Opacity="0.7" FontSize="16" FontFamily="DengXian" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <Run Text="引用: #"/>
+                                <Run Text="{Binding pcount}"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding puserName}"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding ppostDate}"/>
+                            </TextBlock>
+                            <ACFUN:RichTextBlock FontFamily="DengXian" Margin="0,5,-12,0" Width="428" Text="{Binding pcontent_nohtml}" MaxHeight="40" BorderThickness="0" FontSize="16" Opacity="0.7"/>
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Width="80">
+                            <Image Height="80" Source="{Binding UserImg}"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="#" FontSize="20" FontFamily="DengXian"/>
+                                <TextBlock Text="{Binding count}" FontSize="20" FontFamily="DengXian"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Margin="10,0,0,0" Width="366">
+                            <TextBlock Opacity="0.8" FontSize="16" FontFamily="DengXian" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <Run Foreground="#FF5CB65C" Text="{Binding userName}"/>
+                                <Run Text=" "/>
+                                <Run Text="{Binding postDate}"/>
+                            </TextBlock>
+                            <ACFUN:EmojiBlock FontFamily="DengXian" Margin="-12,5,-12,0" Width="390" Text="{Binding content_nohtml}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Border Height="1" Margin="0,10,0,0" Background="#FF646464"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="indicator" IsIndeterminate="True" Text="正在加载"/>
+    </shell:SystemTray.ProgressIndicator>
+
+    <toolkit:TransitionService.NavigationInTransition >
+        <toolkit:NavigationInTransition >
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideRightFadeIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideRightFadeOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <StackPanel Grid.Row="0" Margin="12,12,0,12">
+            <TextBlock Text="ACFUN文章区" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="提到我的" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - 在此处放置其他内容-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Toolkit:EasyListBox ItemsSource="{Binding MentionList}" ItemTemplate="{StaticResource MentionsDataTemplate}" SelectionChanged="EasyListBox_SelectionChanged" StretchingBottom="EasyListBox_StretchingBottom"/>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

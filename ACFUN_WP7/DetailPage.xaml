@@ -1,0 +1,90 @@
+﻿<phone:PhoneApplicationPage xmlns:ACFUN="clr-namespace:ACFUN" 
+    x:Class="ACFUN.DetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:Toolkit="clr-namespace:Liubaicai.Toolkit;assembly=Liubaicai.Toolkit.EasyListBox"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity="0">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="indicator" IsIndeterminate="True" Text="正在加载"/>
+    </shell:SystemTray.ProgressIndicator>
+
+    <toolkit:TransitionService.NavigationInTransition >
+        <toolkit:NavigationInTransition >
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideRightFadeIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideRightFadeOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar x:Name="appbar">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="save" Text="访问原网页" Click="go_Click"/>
+            </shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton x:Name="savewz" Text="收藏" IconUri="/Assets/AppBar/favs.png" Click="savewz_Click"/>
+            <shell:ApplicationBarIconButton x:Name="viewcomment" Text="查看评论" IconUri="/Assets/AppBar/Banana.png" Click="viewcomment_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <StackPanel Grid.Row="0" Margin="12,12,12,2">
+            <TextBlock x:Name="title" Text="" TextWrapping="Wrap" FontSize="25"/>
+            <TextBlock x:Name="beizhu" Text="" FontSize="15" TextWrapping="Wrap" Opacity="0.5" Margin="12,0"/>
+            <TextBlock Opacity="0.8" HorizontalAlignment="Right" Margin="12,0">
+                        <Run x:Name="name" Foreground="#FF5CB65C" Text=""/>
+                        <Run x:Name="time" Text=""/>
+            </TextBlock>
+        </StackPanel>
+
+        <!--ContentPanel - 在此处放置其他内容-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0">
+            <phone:WebBrowser x:Name="browser" Visibility="Collapsed"/>
+            <Toolkit:EasyListBox ItemsSource="{Binding contentlist}" x:Name="content" Margin="0,10,0,0" StretchingBottom="content_LayoutUpdated">
+                <ListBox.Resources>
+                    <DataTemplate x:Key="DetailContentDataTemplate">
+                        <Grid>
+                            <ACFUN:RichTextBlock Text="{Binding txt}" Visibility="{Binding txtshow}" FontFamily="Microsoft YaHei UI" FontSize="24"/>
+                            <Image Source="{Binding img}" Visibility="{Binding imgshow}" Margin="20,5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.Resources>
+                <ListBox.ItemTemplate>
+                    <StaticResource ResourceKey="DetailContentDataTemplate"/>
+                </ListBox.ItemTemplate>
+            </Toolkit:EasyListBox>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

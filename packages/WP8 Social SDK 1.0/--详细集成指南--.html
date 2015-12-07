@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>**WindowsPhone8 Social SDK 详细集成指南**</title>
+</head>
+<body>
+<h1><strong>WindowsPhone8 Social SDK 详细集成指南</strong></h1>
+
+<ul>
+<li>1 设置分享内容</li>
+<li>2 设置分享选项</li>
+<li>3 分享 
+<ul><li>带平台面板分享</li>
+<li>指定平台分享</li>
+<li>授权+分享</li></ul></li>
+<li>4 登录 </li>
+<li>5 后退键处理 </li>
+<li>6 集成微信</li>
+<li>7 应用信息注册地址列表</li>
+<li>8 绑定友盟应用标识与各开放平台         </li>
+<li>9 FAQ         </li>
+<li>10 常见错误         </li>
+<li>11 技术支持         </li>
+</ul>
+
+<hr class="hr-white">
+
+<h1>1 设置分享内容 </h1>
+
+<p><strong>class ShareData</strong></p>
+
+<table class="table table-striped-white table-bordered">
+<thead>
+<tr>
+  <th>成员</th>
+  <th>类型</th>
+  <th>说明</th>
+  <th>可选性</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>Content</td>
+  <td>string</td>
+  <td>默认要分享的文本（友盟内置编辑界面可进行二次编辑）</td>
+  <td>必要（最长140）</td>
+</tr>
+<tr>
+  <td>Picture</td>
+  <td>BitmapImage</td>
+  <td>要分享的图片</td>
+  <td>可选</td>
+</tr>
+<tr>
+  <td>Url</td>
+  <td>UrlData</td>
+  <td>链接数据</td>
+  <td>可选</td>
+</tr>
+<tr>
+  <td>Location</td>
+  <td>string</td>
+  <td>位置，格式：(经度，纬度)，如：(80.39，39)</td>
+  <td>可选</td>
+</tr>
+</tbody></table>
+
+
+<blockquote>
+  <ul>
+  <li>任何平台不可同时使用Picture和Url。</li>
+  <li>微信会话只能在Content，Picture，Url三种类型中选择一种进行分享。  </li>
+  <li>微信朋友圈只能在Picture，Url两种类型中选择一种进行分享，分享到朋友圈时Content将无效。</li>
+  <li>其他平台除可在Content，Picture，Url三者中选择一种分享外，还可将Content与Picture或Url组合分享。</li>
+  <li>分享链接到QQ空间时只能分享以.swf结尾的视频或音乐原链接。</li>
+  </ul>
+</blockquote>
+
+<p>示例：</p>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="typ">ShareData</span><span class="pln"> shareData </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ShareData</span><span class="pun">();</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="com">//设置文本</span></code></li><li class="L3"><code><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Content</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"I am here~"</span><span class="pun">;</span><span class="pln">  </span></code></li><li class="L4"><code></code></li><li class="L5"><code><span class="com">//设置链接</span></code></li><li class="L6"><code><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">.</span><span class="typ">Link</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">@</span><span class="str">"http://v.yinyuetai.com/video/395495"</span><span class="pun">;</span></code></li><li class="L7"><code><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">.</span><span class="typ">Type</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">UrlType</span><span class="pun">.</span><span class="typ">Video</span><span class="pun">;</span></code></li><li class="L8"><code><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">.</span><span class="typ">Author</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"张学友"</span><span class="pun">;</span></code></li><li class="L9"><code><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">.</span><span class="typ">Title</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"情书"</span><span class="pun">;</span></code></li><li class="L0"><code></code></li><li class="L1"><code><span class="com">//设置图片</span></code></li><li class="L2"><code><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Picture</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">image</span><span class="pun">.</span><span class="typ">Source</span><span class="pln"> </span><span class="kwd">as</span><span class="pln"> </span><span class="typ">BitmapImage</span><span class="pun">;</span><span class="pln"> </span></code></li></ol></pre>
+
+<h1>2 设置分享选项 </h1>
+
+<p><strong>class ShareOption</strong></p>
+
+<table class="table table-striped-white table-bordered">
+<thead>
+<tr>
+  <th>成员</th>
+  <th>类型</th>
+  <th>说明</th>
+  <th>可选性</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>IsEditable</td>
+  <td>bool</td>
+  <td>是否显示友盟编辑界面（默认true）</td>
+  <td>可选</td>
+</tr>
+<tr>
+  <td>IsAutoAuthorize</td>
+  <td>bool</td>
+  <td>若未授权，是否自动授权（默认true）</td>
+  <td>可选</td>
+</tr>
+<tr>
+  <td>Descriptor</td>
+  <td>string</td>
+  <td>分享资源描述符</td>
+  <td>可选</td>
+</tr>
+<tr>
+  <td>ShareCompleted</td>
+  <td>ShareCompletedHandler</td>
+  <td>分享回调，不需要回调可不设置或设为null</td>
+  <td>可选</td>
+</tr>
+</tbody></table>
+
+
+<blockquote>
+  <p><strong>ShareCompleted</strong> <br>
+  void ShareCompletedHandler(ShareCompletedEventArgs e) <br>
+  如需在分享结束后进行某些操作，需在此回调内进行。</p>
+</blockquote>
+
+<p>示例：</p>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="typ">ShareOption</span><span class="pln"> option </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ShareOption</span><span class="pun">();</span></code></li><li class="L1"><code><span class="pln">option</span><span class="pun">.</span><span class="typ">IsEditable</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></code></li><li class="L2"><code><span class="pln">option</span><span class="pun">.</span><span class="typ">IsAutoAuthorize</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></code></li><li class="L3"><code><span class="pln">option</span><span class="pun">.</span><span class="typ">ShareCompleted</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> args </span><span class="pun">=&gt;</span></code></li><li class="L4"><code><span class="pun">{</span></code></li><li class="L5"><code><span class="pln">    </span><span class="com">//当IsEditable为true时，友盟会向用户显示分享结果，开发者不需要再显示。</span></code></li><li class="L6"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">option</span><span class="pun">.</span><span class="typ">IsEditable</span><span class="pun">)</span></code></li><li class="L7"><code><span class="pln">        </span><span class="kwd">return</span><span class="pun">;</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">args</span><span class="pun">.</span><span class="typ">StatusCode</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="typ">UmengSocialSDK</span><span class="pun">.</span><span class="typ">UmEventArgs</span><span class="pun">.</span><span class="typ">Status</span><span class="pun">.</span><span class="typ">Successed</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">    </span><span class="pun">{</span></code></li><li class="L1"><code><span class="pln">        </span><span class="typ">MessageBox</span><span class="pun">.</span><span class="typ">Show</span><span class="pun">(</span><span class="str">"分享成功"</span><span class="pun">);</span></code></li><li class="L2"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L3"><code><span class="pln">    </span><span class="kwd">else</span></code></li><li class="L4"><code><span class="pln">    </span><span class="pun">{</span></code></li><li class="L5"><code><span class="pln">        </span><span class="typ">MessageBox</span><span class="pun">.</span><span class="typ">Show</span><span class="pun">(</span><span class="str">"分享失败"</span><span class="pun">);</span></code></li><li class="L6"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L7"><code><span class="pun">};</span></code></li></ol></pre>
+
+<h1>3 分享 </h1>
+
+<h2>3.1 带平台选择面板分享 </h2>
+
+<p>适用人群：希望10分钟集成从无到有实现分享的开发者 <br>
+接口说明：调用该接口将先弹出分享平台选择页，选择相应的平台将进行授权并分享   </p>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">Share</span><span class="pun">(</span><span class="kwd">string</span><span class="pln"> appKey</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L1"><code><span class="pln">                  </span><span class="typ">ShareData</span><span class="pln"> shareData</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L2"><code><span class="pln">                  </span><span class="typ">Dictionary</span><span class="pun">&lt;</span><span class="typ">SharePlatform</span><span class="pun">,</span><span class="pln"> </span><span class="typ">PlatformInfo</span><span class="pun">&gt;</span><span class="pln"> extendPlatforms</span><span class="pun">,</span><span class="pln">     </span></code></li><li class="L3"><code><span class="pln">                  </span><span class="typ">PhoneApplicationPage</span><span class="pln"> page</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L4"><code><span class="pln">                  </span><span class="typ">ShareOption</span><span class="pln"> option </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">)</span></code></li></ol></pre>
+
+<p><code>appKey</code>：应用唯一标识，从友盟申请获得 <a href="http://www.umeng.com" target="_blank">http://www.umeng.com</a> <br>
+<code>shareData</code>：要分享的数据 <br>
+<code>extendPlatforms</code>：扩展平台，可传null，传null则不支持微信，要支持微信，请参见<strong>集成微信</strong>。 <br>
+<code>page</code>：当前分享操作所在页面 <br>
+<code>option</code>：分享选项  </p>
+
+<p>示例：</p>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="typ">UmengSocial</span><span class="pun">.</span><span class="typ">Share</span><span class="pun">(</span><span class="str">"Your_App_Key"</span><span class="pun">,</span><span class="pln"> shareData</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">,</span><span class="pln"> option</span><span class="pun">);</span></code></li></ol></pre>
+
+<h3>验证结果</h3>
+
+<table class="table table-striped-white table-bordered">
+<thead>
+<tr>
+  <th style="text-align:center;">选择分享平台面板</th>
+  <th style="text-align:center;">分享编辑页</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td style="text-align:center;"><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTQvMDEvMDYvMTZfMzRfMjBfMTEyX3dwX3BsYXRmb3JtLnBuZyJdXQ/wp_platform.png" width="240" height="400"></td>
+  <td style="text-align:center;"><img src="http://github.umeng.com/analytics/sdk-documents/raw/master/components/social/SocialWP/Images/wp_share.png" width="240" height="400"></td>
+</tr>
+</tbody></table>
+
+
+<h2>3.2 指定平台分享 </h2>
+
+<p>适用人群：较深耕细作型开发者，希望自定义分享列表，使用分享底层API，可选择是否使用友盟提供的分享编辑页。 <br>
+接口说明：如果已经授权，则直接分享；否则可通过设置ShareOption.IsAutoAuthorize=true进行先授权然后再分享。相比3.1，该接口不需要弹出平台面板。</p>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">Share</span><span class="pun">(</span><span class="kwd">string</span><span class="pln"> appKey</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L1"><code><span class="pln">                  </span><span class="typ">ShareData</span><span class="pln"> shareData</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L2"><code><span class="pln">                  </span><span class="typ">SharePlatform</span><span class="pln"> platform</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L3"><code><span class="pln">                  </span><span class="typ">PlatformInfo</span><span class="pln"> platformInfo</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L4"><code><span class="pln">                  </span><span class="typ">PhoneApplicationPage</span><span class="pln"> page</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L5"><code><span class="pln">                  </span><span class="typ">ShareOption</span><span class="pln"> option </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">)</span></code></li></ol></pre>
+
+<p><code>appKey</code>：应用唯一标识，从友盟申请获得 <a href="http://www.umeng.com" target="_blank">http://www.umeng.com</a> <br>
+<code>shareData</code>：要分享的数据 <br>
+<code>platform</code>：目标平台。 <br>
+<code>platformInfo</code>：平台信息，分享到微信需传入WxPlatformInfo实例，其他平台可传null 
+<code>page</code>：当前分享操作所在页面 <br>
+<code>option</code>：分享选项  </p>
+
+<p>示例：</p>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="typ">UmengSocial</span><span class="pun">.</span><span class="typ">Share</span><span class="pun">(</span><span class="str">"Your_App_Key"</span><span class="pun">,</span><span class="pln"> shareData</span><span class="pun">,</span><span class="pln"> </span><span class="typ">SharePlatform</span><span class="pun">.</span><span class="typ">Sina</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">,</span><span class="pln"> option</span><span class="pun">);</span></code></li></ol></pre>
+
+<h1>3.3 授权+分享 </h1>
+
+<p>适用人群：深耕细作型开发者，希望完全自定义界面，并需要分离授权与分享操作。 <br>
+接口说明：实现"授权+分享"，你可以将授权接口(Authorize)跟<strong>3.2</strong>中的分享接口结合起来使用。 </p>
+
+<blockquote>
+  <p><strong>此授权接口暂不支持微信</strong></p>
+</blockquote>
+
+<h2>3.3.1 检查指定平台是否已授权 </h2>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="kwd">static</span><span class="pln"> </span><span class="kwd">bool</span><span class="pln"> </span><span class="typ">CheckAuthorized</span><span class="pun">(</span><span class="typ">SharePlatform</span><span class="pln"> platform</span><span class="pun">)</span></code></li></ol></pre>
+
+<h2>3.3.2 授权 </h2>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">Authorize</span><span class="pun">(</span><span class="kwd">string</span><span class="pln"> appKey</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L1"><code><span class="pln">                      </span><span class="typ">SharePlatform</span><span class="pln"> platform</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L2"><code><span class="pln">                      </span><span class="typ">PhoneApplicationPage</span><span class="pln"> page</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L3"><code><span class="pln">                      </span><span class="typ">AuthorizeCompletedHandler</span><span class="pln"> </span><span class="typ">AuthorizeCompleted</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">)</span></code></li></ol></pre>
+
+<p><code>appKey</code>：应用唯一标识，从友盟申请获得 <a href="http://www.umeng.com" target="_blank">http://www.umeng.com</a> <br>
+<code>platform</code>：要授权的平台。 <br>
+<code>page</code>：当前授权操作所在页面 <br>
+<code>AuthorizeCompleted</code>：授权结束回调，要在授权结束后进行某些操作，需在此回调内进行  </p>
+
+<p>示例：</p>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="com">//如果目标平台已授权则直接分享</span></code></li><li class="L1"><code><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="typ">UmengSocial</span><span class="pun">.</span><span class="typ">CheckAuthorized</span><span class="pun">(</span><span class="typ">SharePlatform</span><span class="pun">.</span><span class="typ">Sina</span><span class="pun">))</span></code></li><li class="L2"><code><span class="pun">{</span></code></li><li class="L3"><code><span class="pln">   </span><span class="typ">ShareOption</span><span class="pln"> option </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ShareOption</span><span class="pun">();</span></code></li><li class="L4"><code><span class="pln">   option</span><span class="pun">.</span><span class="typ">IsEditable</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span></code></li><li class="L5"><code><span class="pln">   option</span><span class="pun">.</span><span class="typ">IsAutoAuthorize</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span></code></li><li class="L6"><code></code></li><li class="L7"><code><span class="pln">   </span><span class="typ">UmengSocial</span><span class="pun">.</span><span class="typ">Share</span><span class="pun">(</span><span class="str">"Your_App_Key"</span><span class="pun">,</span><span class="pln"> shareData</span><span class="pun">,</span><span class="pln"> </span><span class="typ">SharePlatform</span><span class="pun">.</span><span class="typ">Sina</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">,</span><span class="pln"> option</span><span class="pun">);</span></code></li><li class="L8"><code><span class="pun">}</span></code></li><li class="L9"><code><span class="com">//如果目标平台未授权则先授权再分享</span></code></li><li class="L0"><code><span class="kwd">else</span></code></li><li class="L1"><code><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">    </span><span class="typ">UmengSocial</span><span class="pun">.</span><span class="typ">Authorize</span><span class="pun">(</span><span class="str">"Your_App_Key"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">SharePlatform</span><span class="pun">.</span><span class="typ">Sina</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">,</span><span class="pln"> args </span><span class="pun">=&gt;</span></code></li><li class="L3"><code><span class="pln">    </span><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">args</span><span class="pun">.</span><span class="typ">StatusCode</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="typ">UmengSocialSDK</span><span class="pun">.</span><span class="typ">UmEventArgs</span><span class="pun">.</span><span class="typ">Status</span><span class="pun">.</span><span class="typ">Successed</span><span class="pun">)</span></code></li><li class="L5"><code><span class="pln">        </span><span class="pun">{</span></code></li><li class="L6"><code><span class="pln">            </span><span class="typ">ShareOption</span><span class="pln"> option </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ShareOption</span><span class="pun">();</span></code></li><li class="L7"><code><span class="pln">            option</span><span class="pun">.</span><span class="typ">IsEditable</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span></code></li><li class="L8"><code><span class="pln">            option</span><span class="pun">.</span><span class="typ">IsAutoAuthorize</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span></code></li><li class="L9"><code></code></li><li class="L0"><code><span class="pln">            </span><span class="typ">UmengSocial</span><span class="pun">.</span><span class="typ">Share</span><span class="pun">(</span><span class="str">"Your_App_Key"</span><span class="pun">,</span><span class="pln"> shareData</span><span class="pun">,</span><span class="pln"> </span><span class="typ">SharePlatform</span><span class="pun">.</span><span class="typ">Sina</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">,</span><span class="pln"> option</span><span class="pun">);</span></code></li><li class="L1"><code><span class="pln">        </span><span class="pun">}</span></code></li><li class="L2"><code><span class="pln">    </span><span class="pun">});</span></code></li><li class="L3"><code><span class="pun">}</span></code></li></ol></pre>
+
+<h1>4 登录 </h1>
+
+<p>该接口需要与3.3节授权接口一起使用完成登录功能。</p>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">GetUserInfo</span><span class="pun">(</span><span class="kwd">string</span><span class="pln"> appKey</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L1"><code><span class="pln">                        </span><span class="typ">SharePlatform</span><span class="pln"> platform</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L2"><code><span class="pln">                        </span><span class="typ">GetUserInfoCompletedHandler</span><span class="pln"> </span><span class="typ">GetUserInfoCompleted</span><span class="pun">)</span></code></li></ol></pre>
+
+<p><code>appKey</code>：应用唯一标识，从友盟申请获得 <a href="http://www.umeng.com" target="_blank">http://www.umeng.com</a> <br>
+<code>platform</code>：目标平台。 <br>
+<code>GetUserInfoCompleted</code>：回调，回调中会返回包含用户信息的UserInfo对象。</p>
+
+<p><strong>class UserInfo</strong></p>
+
+<table class="table table-striped-white table-bordered">
+<thead>
+<tr>
+  <th>成员</th>
+  <th>类型</th>
+  <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>ProfileImage</td>
+  <td>string</td>
+  <td>头像</td>
+</tr>
+<tr>
+  <td>UserName</td>
+  <td>string</td>
+  <td>用户名</td>
+</tr>
+<tr>
+  <td>Gender</td>
+  <td>string</td>
+  <td>性别：0-女，1-男</td>
+</tr>
+<tr>
+  <td>Location</td>
+  <td>string</td>
+  <td>位置</td>
+</tr>
+<tr>
+  <td>Description</td>
+  <td>string</td>
+  <td>个人描述</td>
+</tr>
+</tbody></table>
+
+
+<p>示例：</p>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="typ">UmengSocial</span><span class="pun">.</span><span class="typ">Authorize</span><span class="pun">(</span><span class="str">"Your_App_Key"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">SharePlatform</span><span class="pun">.</span><span class="typ">Sina</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">,</span><span class="pln"> args </span><span class="pun">=&gt;</span></code></li><li class="L1"><code><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">   </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">args</span><span class="pun">.</span><span class="typ">StatusCode</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="typ">UmengSocialSDK</span><span class="pun">.</span><span class="typ">UmEventArgs</span><span class="pun">.</span><span class="typ">Status</span><span class="pun">.</span><span class="typ">Successed</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">   </span><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">      </span><span class="typ">UmengSocial</span><span class="pun">.</span><span class="typ">GetUserInfo</span><span class="pun">(</span><span class="str">"Your_App_Key"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">SharePlatform</span><span class="pun">.</span><span class="typ">Sina</span><span class="pun">,</span><span class="pln"> args1 </span><span class="pun">=&gt;</span></code></li><li class="L5"><code><span class="pln">      </span><span class="pun">{</span></code></li><li class="L6"><code><span class="pln">         </span><span class="com">//通过args1.Result取得UserInfo对象并对其做相应操作...</span></code></li><li class="L7"><code><span class="pln">      </span><span class="pun">});</span></code></li><li class="L8"><code><span class="pln">   </span><span class="pun">}</span></code></li><li class="L9"><code><span class="pun">});</span></code></li></ol></pre>
+
+<h1>5 后退键处理 </h1>
+
+<p>如果您在后退键的处理中有自己的业务逻辑，需要在最开始处加入以下代码（没有则不需要）：</p>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="kwd">protected</span><span class="pln"> </span><span class="kwd">override</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> </span><span class="typ">OnBackKeyPress</span><span class="pun">(</span><span class="typ">System</span><span class="pun">.</span><span class="typ">ComponentModel</span><span class="pun">.</span><span class="typ">CancelEventArgs</span><span class="pln"> e</span><span class="pun">)</span></code></li><li class="L1"><code><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">   </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="typ">UmengSocial</span><span class="pun">.</span><span class="typ">IsShown</span><span class="pun">)</span></code></li><li class="L3"><code><span class="pln">   </span><span class="pun">{</span></code></li><li class="L4"><code><span class="pln">      e</span><span class="pun">.</span><span class="typ">Cancel</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></code></li><li class="L5"><code><span class="pln">      </span><span class="kwd">return</span><span class="pun">;</span></code></li><li class="L6"><code><span class="pln">   </span><span class="pun">}</span><span class="pln">                </span></code></li><li class="L7"><code></code></li><li class="L8"><code><span class="pln">   </span><span class="kwd">var</span><span class="pln"> res </span><span class="pun">=</span><span class="pln"> </span><span class="typ">MessageBox</span><span class="pun">.</span><span class="typ">Show</span><span class="pun">(</span><span class="str">"确认要退出吗？"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"UmengSocialDemo"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">MessageBoxButton</span><span class="pun">.</span><span class="typ">OKCancel</span><span class="pun">);</span></code></li><li class="L9"><code><span class="pln">   </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="typ">MessageBoxResult</span><span class="pun">.</span><span class="typ">Cancel</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> res</span><span class="pun">)</span></code></li><li class="L0"><code><span class="pln">   </span><span class="pun">{</span></code></li><li class="L1"><code><span class="pln">      e</span><span class="pun">.</span><span class="typ">Cancel</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></code></li><li class="L2"><code><span class="pln">   </span><span class="pun">}</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">   </span><span class="kwd">base</span><span class="pun">.</span><span class="typ">OnBackKeyPress</span><span class="pun">(</span><span class="pln">e</span><span class="pun">);</span></code></li><li class="L5"><code><span class="pun">}</span></code></li></ol></pre>
+
+<h1>6 集成微信 </h1>
+
+<p>微信采用SSO认证方式，详情请参见快速集成中第5节<strong>集成微信</strong>。</p>
+
+<blockquote>
+  <p>SSO名词解释 : SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。 <br>
+   例如用户已经登录微信客户端，使用SSO授权登录时则不需要用户手动输入用户名、密码，直接点击登录即可， 因此可成为免登录.     </p>
+</blockquote>
+
+<h1>7 应用信息注册地址列表 </h1>
+
+<p>下面是Social SDK不同平台应用信息注册网站的地址:  </p>
+
+<table class="table table-striped-white table-bordered">
+<thead>
+<tr>
+  <th style="text-align:center;">平台</th>
+  <th style="text-align:center;">网址</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td style="text-align:center;">新浪微博</td>
+  <td style="text-align:center;"><a href="http://open.weibo.com" target="_blank">http://open.weibo.com</a></td>
+</tr>
+<tr>
+  <td style="text-align:center;">腾讯微博</td>
+  <td style="text-align:center;"><a href="http://dev.t.qq.com" target="_blank">http://dev.t.qq.com</a></td>
+</tr>
+<tr>
+  <td style="text-align:center;">QQ空间</td>
+  <td style="text-align:center;"><a href="http://connect.qq.com/intro/login/" target="_blank">http://connect.qq.com/intro/login/</a></td>
+</tr>
+<tr>
+  <td style="text-align:center;">微信好友</td>
+  <td style="text-align:center;"><a href="http://open.weixin.qq.com" target="_blank">http://open.weixin.qq.com</a></td>
+</tr>
+<tr>
+  <td style="text-align:center;">FaceBook</td>
+  <td style="text-align:center;"><a href="https://developers.facebook.com" target="_blank">https://developers.facebook.com</a></td>
+</tr>
+<tr>
+  <td style="text-align:center;">Twitter</td>
+  <td style="text-align:center;"><a href="https://dev.twitter.com" target="_blank">https://dev.twitter.com</a></td>
+</tr>
+<tr>
+  <td style="text-align:center;">人人</td>
+  <td style="text-align:center;"><a href="http://dev.renren.com" target="_blank">http://dev.renren.com</a></td>
+</tr>
+<tr>
+  <td style="text-align:center;">豆瓣</td>
+  <td style="text-align:center;"><a href="http://developers.douban.com/" target="_blank">http://developers.douban.com/</a></td>
+</tr>
+</tbody></table>
+
+
+<h1>8 绑定友盟应用标识与各开放平台</h1>
+
+<p>获得appkey后，为了方便您可以快速集成我们的社会化分享的服务，我们会为你对各个平台提供一个默认的appkey和appsecret，如果你想使用自己的微博平台的应用，您需在在我们网站更改默认的微博appkey，具体操作是：登录友盟网站-&gt;左上角选择你们的产品-&gt;组件-&gt;社会化组件-&gt;设置,菜单项下进行绑定配置。如果你尚未在我们支持的分享平台注册你的应用，注册过程可以参考如下：</p>
+
+<h3><strong>新浪微博</strong></h3>
+
+<pre><code>1. 在新浪开放平台后台创建移动应用：http://open.weibo.com -&gt; 应用开发 -&gt; 移动应用 -&gt; 创建应用
+
+2. 在创建好新应用后，选择“基本信息”，安全域名填写"sns.whalecloud.com"，其余字段按需填写；（如果是已有应用，可以在应用信息-&gt;基本设置-&gt;安全域名中做修改）
+
+3. 如果应用尚未通过审核，则需要指定测试用户，该阶段只有指定的测试用户才可以分享信息到新浪微博，应用通过审核后此限制自动失效。
+
+4. 将获取到的Key和Secret手工填写到友盟后台对应应用的组件 -&gt; 社会化组件 -&gt; 设置页 -&gt; 新浪微博APP绑定信息部分。
+</code></pre>
+
+<h3><strong>腾讯微博</strong></h3>
+
+<pre><code>1. 生成封装链接。如果还未配置应用地址的封装链接，需要在友盟后台对应应用的组件 -&gt;社会化组件 -&gt;设置页 中生成封装链接；
+![appurl_socialurl](http://dev.umeng.com/images/ios/appurl_socialurl.png)
+
+2. 在腾讯开放平台后台创建无线应用：http://dev.t.qq.com/ -&gt; 应用开发 -&gt; 创建应用 -&gt; “无线应用”；
+
+3. 在创建无线应用表单中，“应用网址”需要填写步骤1生成的应用网址的封装链接，其余字段按需填写；
+
+（如果是已有应用，可以在基本信息 -&gt; 应用网址中填写上述的封装链接）
+
+4. 将获取到的Key和Secret手工填写到友盟后台对应应用的组件 -&gt; 社会化组件 -&gt; 设置页 -&gt; 腾讯微博APP绑定信息部分。
+</code></pre>
+
+<h3><strong>人人网</strong></h3>
+
+<pre><code>人人网开放平台（不推荐继续使用，两种接入方式的区别详见，http://wiki.mobile.renren.com/zh/index.php/接入流程指南#.E5.B7.B2.E6.8E.A5.E5.85.A5.E8.BF.87.E4.BA.BA.E4.BA.BA）
+
+1. 在如下位置创建应用：http://dev.renren.com/ -&gt; 应用开发 -&gt; 创建客户端应用 -&gt; 填写应用名称；
+
+2. 在已创建应用的基本信息 -&gt; 应用根域名字段填写为“sns.whalecloud.com”；
+
+3. 应用处于“开发中”状态（未审核通过前），需要在用户管理页面中添加测试用户，这些特定用户才能分享成功。应用通过审核后此限制自动失效。
+
+4. 将获取到的App ID、API Key、Secret手工填写到友盟后台对应应用的组件 -&gt; 社会化组件 -&gt; 设置页 -&gt; 人人网APP绑定信息部分，并勾选“开放平台”。
+</code></pre>
+
+<h3><strong>豆瓣</strong></h3>
+
+<pre><code>与人人网的申请、配置方式基本一致，开放平台链接如下：http://developers.douban.com/
+
+回调地址为：http://sns.whalecloud.com/douban/callback
+
+权限必须选择豆瓣广播
+</code></pre>
+
+<h3><strong>QQ空间</strong></h3>
+
+<pre><code>1. 在如下位置创建应用：http://connect.qq.com/manage/ -&gt; 添加移动应用 -&gt; 填写应用名称，确定；
+
+2. 在接下来的应用控制台 -&gt; 基本信息 -&gt; 点击编辑按钮，填写必要的应用信息，并保存。（不做有可能授权失败）
+
+3. 将获取到的APP ID、Key手工填写到友盟后台对应应用的组件 -&gt; 社会化组件 -&gt; 设置页 -&gt; QQ空间APP绑定信息部分。
+
+4. 按照以上配置可以满足大部分的图片分享需求，即指定图片URL进行图片分享；如需支持上传图片内容并分享，要在此页面另行申请upload_pic权限：http://wiki.opensns.qq.com/wiki/【QQ登录】API文档）
+</code></pre>
+
+<h1>9 FAQ </h1>
+
+<p>请到<a href="http://support.umeng.com/?qa=ios-sdk-%E9%9B%86-%E6%88%90" target="_blank">友盟社会化组件的帮助与支持页面</a></p>
+
+<h1>10 常见错误 </h1>
+
+<p>设置<strong>UmengSocial.IsDebug=true</strong>，可在<strong>output</strong>中观察log信息。  </p>
+
+<p>如过返回错误码不在以下表格中，请查阅相关分享平台错误码.  </p>
+
+<p><strong>Social错误代码及错误信息</strong></p>
+
+<table class="table table-striped-white table-bordered">
+<thead>
+<tr>
+  <th style="text-align:left;">错误代码</th>
+  <th style="text-align:left;">错误说明</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td style="text-align:left;">5001</td>
+  <td style="text-align:left;">错误的友盟appkey，或者此appkey没有绑定任何平台.如果开发者绑定了，依然出现这个问题，让开发者再试一下，可能是刚绑定马上就测试的原因，最好等2分钟</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5002</td>
+  <td style="text-align:left;">这个友盟appkey已经被禁止</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5003</td>
+  <td style="text-align:left;">请求的参数中没有uid</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5004</td>
+  <td style="text-align:left;">未知的错误，具体的错误信息会在log的输出中</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5005</td>
+  <td style="text-align:left;">访问频率超限，可一会儿再试</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5006</td>
+  <td style="text-align:left;">请求参数中没有content字段</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5007</td>
+  <td style="text-align:left;">请求参数中content字段的内容为空</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5008</td>
+  <td style="text-align:left;">没有上传图片</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5009</td>
+  <td style="text-align:left;">此友盟的appkey没有绑定对应平台的appkey和appsecret</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5010</td>
+  <td style="text-align:left;">userid无效，这个用户并没有进行授权</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5013</td>
+  <td style="text-align:left;">userid无效，请求的参数中没有appkey这个字段</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5014</td>
+  <td style="text-align:left;">没有对此用户进行授权</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5016</td>
+  <td style="text-align:left;">分享信息重复</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5017</td>
+  <td style="text-align:left;">分享图片大小有问题</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5024</td>
+  <td style="text-align:left;">获取access token失败，具体看log输出</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5025</td>
+  <td style="text-align:left;">获取access token失败，具体看log输出</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5027</td>
+  <td style="text-align:left;">授权已经过期</td>
+</tr>
+<tr>
+  <td style="text-align:left;">5028</td>
+  <td style="text-align:left;">授权已经过期</td>
+</tr>
+</tbody></table>
+
+
+<table class="table table-striped-white table-bordered">
+<thead>
+<tr>
+  <th style="text-align:left;">错误代码</th>
+  <th style="text-align:left;">错误说明</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td style="text-align:left;">500</td>
+  <td style="text-align:left;">给定uid的用户并不存在</td>
+</tr>
+<tr>
+  <td style="text-align:left;">501</td>
+  <td style="text-align:left;">绑定账户失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">502</td>
+  <td style="text-align:left;">解绑定失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">503</td>
+  <td style="text-align:left;">评论失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">504</td>
+  <td style="text-align:left;">获取评论失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">505</td>
+  <td style="text-align:left;">用户被加入黑名单</td>
+</tr>
+<tr>
+  <td style="text-align:left;">506</td>
+  <td style="text-align:left;">获取好友失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">507</td>
+  <td style="text-align:left;">获取授权url失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">508</td>
+  <td style="text-align:left;">解除授权失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">510</td>
+  <td style="text-align:left;">分享失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">511</td>
+  <td style="text-align:left;">获取bar失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">512</td>
+  <td style="text-align:left;">从平台获取用户信息失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">513</td>
+  <td style="text-align:left;">url跳转失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">514</td>
+  <td style="text-align:left;">从social获取用户信息失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">515</td>
+  <td style="text-align:left;">请求的参数错误</td>
+</tr>
+<tr>
+  <td style="text-align:left;">516</td>
+  <td style="text-align:left;">请求喜欢失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">517</td>
+  <td style="text-align:left;">版本号错误</td>
+</tr>
+</tbody></table>
+
+
+<table class="table table-striped-white table-bordered">
+<thead>
+<tr>
+  <th style="text-align:left;">错误代码</th>
+  <th style="text-align:left;">错误说明</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td style="text-align:left;">-101</td>
+  <td style="text-align:left;">没有Oauth授权</td>
+</tr>
+<tr>
+  <td style="text-align:left;">-102</td>
+  <td style="text-align:left;">未知错误</td>
+</tr>
+<tr>
+  <td style="text-align:left;">-103</td>
+  <td style="text-align:left;">服务器没响应</td>
+</tr>
+<tr>
+  <td style="text-align:left;">-104</td>
+  <td style="text-align:left;">初始化失败</td>
+</tr>
+<tr>
+  <td style="text-align:left;">-105</td>
+  <td style="text-align:left;">参数错误</td>
+</tr>
+<tr>
+  <td style="text-align:left;">-121</td>
+  <td style="text-align:left;">网络未连接</td>
+</tr>
+</tbody></table>
+
+
+<p>其他平台错误码</p>
+
+<blockquote>
+  <p><a href="http://open.weibo.com/wiki/Error_code" target="_blank">新浪微博错误码</a>  </p>
+  
+  <p><a href="http://wiki.open.t.qq.com/index.php/%E8%BF%94%E5%9B%9E%E9%94%99%E8%AF%AF%E7%A0%81%E8%AF%B4%E6%98%8E" target="_blank">腾讯微博错误码</a>   </p>
+  
+  <p><a href="http://wiki.connect.qq.com/%E5%85%AC%E5%85%B1%E8%BF%94%E5%9B%9E%E7%A0%81%E8%AF%B4%E6%98%8E" target="_blank">QQ和QQ空间错误码</a>   </p>
+</blockquote>
+
+<h1>11 技术支持</h1>
+
+<p>请发邮件至social-support@umeng.com。如果您出现的问题和SDK相关，请说明您使用的是WindowsPhone的SDK，我们会尽快回复您。</p>
+</body>
+</html>

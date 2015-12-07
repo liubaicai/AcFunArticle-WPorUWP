@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="AcFunBlue.Views.About"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AcFunBlue.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- TitlePanel -->
+        <StackPanel Grid.Row="0" Margin="20,-5,20,10">
+            <TextBlock x:Uid="Header" Text="AcFun文章区" FontSize="16" FontFamily="DengXian" Style="{ThemeResource TitleTextBlockStyle}" Typography.Capitals="SmallCaps"/>
+            <TextBlock Text="关于" FontSize="45" Style="{ThemeResource HeaderTextBlockStyle}"/>
+        </StackPanel>
+
+        <!--TODO: Content should be placed within the following grid-->
+        <Grid Grid.Row="1" x:Name="ContentRoot">
+            <StackPanel>
+                <TextBlock TextWrapping="Wrap" Margin="20,0,20,20" FontSize="20">
+                    <Run Text="ACFUN非官方文章区客户端"/>
+                    <Run Text="{Binding Version}"/>
+                    <Run Text="版，本应用永久免费~"/>
+                    <LineBreak/>
+                    <Run Text="如果您对本应用有什么意见和建议，欢迎戳下面的'点此联系我'给我发送邮件(商店的评论无法回复)~"/>
+                    <LineBreak/>
+                    <Run Text="如果感觉这个应用还不错，就给个好评呗~ 您的好评是我前进的动力~"/>
+                    <LineBreak/>
+                    <Run Text="朋(ji)友(lao)们请轻喷~"/>
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="24,15,24,0">
+                    <HyperlinkButton Name="mail" Content="点此联系我" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="20" Width="100" Click="mail_Click" Margin="0,0,0,0"/>
+                    <HyperlinkButton NavigateUri="http://www.liubaicai.com" Name="blog" Content="我的主页" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="20" Width="100" Margin="30,0,0,0"/>
+                    <HyperlinkButton Name="loveus" Content="好评我" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="20" Width="100" Click="loveus_Click" Margin="30,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

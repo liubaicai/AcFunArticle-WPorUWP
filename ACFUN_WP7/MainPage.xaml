@@ -1,0 +1,191 @@
+﻿<phone:PhoneApplicationPage 
+    xmlns:Controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls" 
+    x:Class="ACFUN.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:Toolkit="clr-namespace:Liubaicai.Toolkit;assembly=Liubaicai.Toolkit.EasyListBox"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity="0">
+
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="indicator" IsIndeterminate="True" Text="正在加载"/>
+    </shell:SystemTray.ProgressIndicator>
+
+    <toolkit:TransitionService.NavigationInTransition >
+        <toolkit:NavigationInTransition >
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideRightFadeIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideRightFadeOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+    
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="ListBoxStyle">
+            <Grid Width="432" Margin="0,0,0,10">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Height="80">
+                            <Border Background="#FF5CB65C"/>
+                            <TextBlock Text="{Binding dis}" Foreground="White" FontSize="36" HorizontalAlignment="Right" Margin="0,-3,0,0"/>
+                            <TextBlock Text="评论" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="24"/>
+                        </Grid>
+                        <StackPanel Margin="10,0,0,0" Height="80">
+                            <TextBlock Text="{Binding title}" Foreground="White" FontSize="20" TextWrapping="Wrap" Width="340" MaxHeight="52" Height="52"/>
+                            <TextBlock Foreground="White" FontSize="14" Margin="0,8,0,0">
+                            <Run Text="{Binding name}"/>
+                            <Run Text="{Binding time}"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBlock Text="{Binding beizhu}" Foreground="White" Opacity="0.5" Margin="30,2,0,0" FontSize="16" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Controls:Pivot Margin="0" SelectionChanged="Pivot_SelectionChanged">
+            <Controls:Pivot.Title>
+                <Grid Width="440" Margin="0,0,0,0">
+                    <TextBlock Text="ACFUN文章区" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Grid>
+            </Controls:Pivot.Title>
+            <Controls:PivotItem CacheMode="{x:Null}" Header="综合">
+                <Toolkit:EasyListBox Name="listbox1" ItemsSource="{Binding list1}" ItemTemplate="{StaticResource ListBoxStyle}" Margin="12,0" SelectionChanged="ListBox_SelectionChanged" StretchingBottom="ListBox1_LayoutUpdated"/>
+            </Controls:PivotItem>
+            <Controls:PivotItem CacheMode="{x:Null}" Header="工作情感">
+                <Toolkit:EasyListBox Name="listbox2" ItemsSource="{Binding list2}" ItemTemplate="{StaticResource ListBoxStyle}" Margin="12,0" SelectionChanged="ListBox_SelectionChanged" StretchingBottom="ListBox2_LayoutUpdated"/>
+            </Controls:PivotItem>
+            <Controls:PivotItem CacheMode="{x:Null}" Header="动漫文化">
+                <Toolkit:EasyListBox Name="listbox3" ItemsSource="{Binding list3}" ItemTemplate="{StaticResource ListBoxStyle}" Margin="12,0" SelectionChanged="ListBox_SelectionChanged" StretchingBottom="ListBox3_LayoutUpdated"/>
+            </Controls:PivotItem>
+            <Controls:PivotItem CacheMode="{x:Null}" Header="关于" Margin="0">
+                <Grid Margin="0,10">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Margin="24,10,24,0">
+                            <Run Text="ACFUN非官方文章区客户端"/>
+                            <Run Text="{Binding Version}"/>
+                            <Run Text="版，本应用永久免费~"/>
+                            <LineBreak/>
+                            <Run Text="如果您对本应用有什么意见和建议，欢迎戳下面的'点此联系我'给我发送邮件(商店的评论无法回复)~"/>
+                            <LineBreak/>
+                            <Run Text="如果感觉这个应用还不错，就给个好评呗~ 您的好评是我前进的动力~"/>
+                            <LineBreak/>
+                            <Run Text="朋(ji)友(lao)们请轻喷~"/>
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" Margin="24,15,24,0">
+                            <HyperlinkButton Name="mail" Content="点此联系我" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="20" Width="150" Click="mail_Click" Margin="0,0,0,0"/>
+                            <HyperlinkButton TargetName="_blank" NavigateUri="http://www.liubaicai.com" Name="blog" Content="我的主页" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="20" Width="150" Margin="0,0,0,0"/>
+                            <HyperlinkButton Name="loveus" Content="好评我" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="20" Width="150" Click="loveus_Click" Margin="0,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBlock Name="ad" Text="凌晨零点启动应用这里会出现恐怖的东西不信你试试" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20"/>
+                </Grid>
+            </Controls:PivotItem>
+            <Controls:PivotItem CacheMode="{x:Null}" Header="个人中心">
+                <Grid Margin="12,0" toolkit:TiltEffect.IsTiltEnabled="True">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Width="100" Height="100" Margin="20,0,0,0" Background="White">
+                                <Image Name="userlogo" Source="/Assets/Emoji/ac/26.png"/>
+                            </Grid>
+                            <StackPanel>
+                                <Grid Width="250">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
+                                        <TextBlock Name="name" Text=""/>
+                                        <HyperlinkButton x:Name="zhuxiao" Content="注销" Click="zhuxiao_Click" Visibility="Collapsed"/>
+                                    </StackPanel>
+                                    <HyperlinkButton x:Name="denglu" HorizontalAlignment="Center" VerticalAlignment="Center" Content="登录" Click="denglu_Click" />
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0">
+                                <toolkit:HubTile x:Name="mentionsTile" Title="提到我的" Source="{Binding RandomAC}" Background="#FF5CB65C" Tap="mentionsTile_Tap"/>
+                                <toolkit:HubTile x:Name="collectionTile" Title="收藏夹" Margin="50,0,0,0" Source="{Binding RandomAIS}" Background="#FF5CB65C" Tap="collectionTile_Tap"/>
+                            </StackPanel>
+                            <Image Name="newmention" Visibility="Collapsed" Source="/Assets/new.png" Width="50" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,15,0,0"/>
+                        </Grid>
+                        <toolkit:ToggleSwitch IsChecked="{Binding IsShowImage,Mode=TwoWay}" Margin="5,30,8,0">
+                            <TextBlock  Text="图片显示(费流量)" FontSize="30" FontFamily="DengXian" Margin="0,-10,0,8"/>
+                        </toolkit:ToggleSwitch>
+                        <!--<Grid Margin="16,0,8,0">
+                            <TextBlock VerticalAlignment="Center" FontSize="30" FontFamily="DengXian">
+                                <Run Text="缓存大小:"/>
+                                <Run x:Name="cachesize" Text=""/>
+                            </TextBlock>
+                            <Button Click="ClearCache_Click" Content="清理" Margin="80,-12,0,-12" Padding="10,0" HorizontalAlignment="Right"/>
+                        </Grid>-->
+                    </StackPanel>
+                </Grid>
+            </Controls:PivotItem>
+        </Controls:Pivot>
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>-->
+
+        <!-- 本地化说明:
+            若要本地化显示的字符串，请将其值复制到应用程序的非特定语言资源文件(AppResources.resx)
+            中的适当命名的键，然后
+            将属性的引号之间的硬编码文本值
+            替换为其路径指向该字符串名称的绑定子句。
+
+            例如:
+
+                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
+
+            此绑定指向模板的名为“ApplicationTitle”的字符串资源。
+
+            在“项目属性”选项卡中添加受支持的语言将会为
+            每种语言创建一个新的 resx 文件，该文件可以包含 UI 字符串的翻译值
+            。这些示例中的绑定将导致在运行时从
+            与应用程序的 CurrentUICulture 匹配的 .resx 文件中
+            提取属性的值。
+         -->
+
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <!--<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="我的应用程序" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
+            <TextBlock Text="页面名称" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>-->
+
+        <!--ContentPanel - 在此处放置其他内容-->
+        <!--<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+
+        </Grid>-->
+
+        <!--取消注释，以显示对齐网格，从而帮助确保
+            控件在公用边界上对齐。图像在系统栏中显示时的
+            上边距为 -32px。如果隐藏了系统栏，则将此值设为 0
+            (或完全删除边距)。
+
+            在发送之前删除此 XAML 和图像本身。-->
+        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
+    </Grid>
+
+</phone:PhoneApplicationPage>

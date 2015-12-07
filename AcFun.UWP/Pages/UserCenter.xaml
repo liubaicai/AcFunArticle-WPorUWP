@@ -1,0 +1,106 @@
+﻿<Page
+    x:Class="AcFun.UWP.Pages.UserCenter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AcFun.UWP.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:control="using:AcFun.UWP.Control"
+    mc:Ignorable="d"
+    DataContext="{StaticResource UserData}">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <StackPanel Orientation="Horizontal">
+                <Image Width="100" Height="100" Source="{Binding UserLoginData.Img}" HorizontalAlignment="Center"></Image>
+                <Grid Margin="20,0,0,0">
+                    <TextBlock Text="{Binding UserLoginData.Username}" HorizontalAlignment="Left" FontSize="26.667" FontFamily="Microsoft YaHei" Foreground="#FF646464" VerticalAlignment="Top"></TextBlock>
+                    <Button x:Name="CheckIn" Click="CheckIn_OnClick" Content="签到" Foreground="White" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="#FF3A9BD9"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <Grid Row="1">
+            <Pivot>
+                <PivotItem>
+                    <PivotItem.Header>
+                        <TextBlock Text="黄历"></TextBlock>
+                    </PivotItem.Header>
+                    <Grid>
+                        <Grid x:Name="LayoutRoot" MaxWidth="600" Margin="10,0,10,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="90"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Grid Row="0">
+                                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Foreground="#FF646464" x:Name="dateTextBlock" Text="" FontSize="30"></TextBlock>
+                                    <TextBlock Foreground="#FF646464" x:Name="ndateTextBlock" Text="" FontSize="15"></TextBlock>
+                                </StackPanel>
+                                <TextBlock Foreground="#FFCD3333" x:Name="jxTextBlock" Text="" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="50"></TextBlock>
+                            </Grid>
+
+                            <!--ContentPanel - 在此处放置其他内容-->
+                            <Grid x:Name="ContentPanel" Row="1">
+                                <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition x:Name="XColumnDefinition" Width="135"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Column="0" Background="#FFFFEE44">
+                                                <TextBlock Margin="5,0" Text="宜" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF646464" FontSize="50"></TextBlock>
+                                            </Grid>
+                                            <Grid Column="1" Background="#FFFFFFAA">
+                                                <ListView Background="Transparent" x:Name="GoodListBox" 
+                                      ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0" 
+                                      ItemTemplate="{StaticResource JxListItemDataTemplate}" IsHitTestVisible="False"/>
+                                            </Grid>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition x:Name="JColumnDefinition" Width="135"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Column="0" Background="#FFFF4444">
+                                                <TextBlock Margin="5,0" Text="忌" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="50"></TextBlock>
+                                            </Grid>
+                                            <Grid Column="1" Background="#FFFFDDD3">
+                                                <ListView Background="Transparent" x:Name="BadListBox" 
+                                      ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0" 
+                                      ItemTemplate="{StaticResource JxListItemDataTemplate}" IsHitTestVisible="False"/>
+                                            </Grid>
+                                        </Grid>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </PivotItem>
+                <!--<PivotItem>
+                    <PivotItem.Header>
+                        <TextBlock Text="提到我的"></TextBlock>
+                    </PivotItem.Header>
+                    <Grid>
+                        <control:ListViewBottomDetectControl x:Name="AtListView" ItemTemplate="{StaticResource CollectionItemTemplate}" ItemsSource="{Binding AtListViewData}"/>
+                    </Grid>
+                </PivotItem>-->
+                <PivotItem>
+                    <PivotItem.Header>
+                        <TextBlock Text="稿件收藏"></TextBlock>
+                    </PivotItem.Header>
+                    <Grid>
+                        <control:ListViewBottomDetectControl x:Name="CollectionListView" IsItemClickEnabled="True" BottomArrived="CollectionListView_OnBottomArrived" ItemTemplate="{StaticResource CollectionItemTemplate}" ItemClick="CollectionListView_OnItemClick"  ItemsSource="{Binding CollectionListViewData}"/>
+                    </Grid>
+                </PivotItem>
+            </Pivot>
+        </Grid>
+    </Grid>
+</Page>

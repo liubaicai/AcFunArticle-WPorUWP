@@ -1,0 +1,131 @@
+﻿<Page
+    x:Class="AcFun.UWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AcFun.UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:control="using:AcFun.UWP.Control"
+    mc:Ignorable="d"
+    x:Name="ThisPage"
+    d:DesignWidth="800"
+    d:DesignHeight="600">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowSizeStates">
+                <VisualState x:Name="large">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1400" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SplitViewControl.DisplayMode" Value="CompactInline" />
+                        <Setter Target="SplitViewControl.IsPaneOpen" Value="True" />
+                        <Setter Target="FirstFrame.Width" Value="550" />
+                        <Setter Target="HamburgButton.Width" Value="100" />
+                        <Setter Target="ThisPage.IsCanCloseSplitView" Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SplitViewControl.DisplayMode" Value="CompactOverlay" />
+                        <Setter Target="SplitViewControl.IsPaneOpen" Value="False" />
+                        <Setter Target="FirstFrame.Width" Value="400" />
+                        <Setter Target="HamburgButton.Width" Value="50" />
+                        <Setter Target="ThisPage.IsCanCloseSplitView" Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="400" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SplitViewControl.DisplayMode" Value="Overlay" />
+                        <Setter Target="SplitViewControl.IsPaneOpen" Value="False" />
+                        <Setter Target="FirstFrame.Width" Value="300" />
+                        <Setter Target="HamburgButton.Width" Value="50" />
+                        <Setter Target="ThisPage.IsCanCloseSplitView" Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="Assets/back.jpg"/>
+        </Grid.Background>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="FirstFrame">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Grid Background="Gray">
+                    <AppBarButton x:Name="HamburgButton" Width="50" Margin="0,-4" Click="HamburgButton_OnClick"
+                          Foreground="White" 
+                          Style="{StaticResource AppBarButtonStyle}">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE700;"></FontIcon>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                </Grid>
+
+                <TextBlock Margin="10,0,0,0" FontSize="25" Foreground="#FF333333" Text="{Binding ChannelTitle}" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <SplitView Grid.Row="1" x:Name="SplitViewControl" OpenPaneLength="100" CompactPaneLength="50">
+                <SplitView.Pane>
+                    <Grid Background="Gray" PointerEntered="SplitViewControl_PointerEntered" PointerExited="SplitViewControl_PointerExited">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ScrollViewer Width="100" VerticalScrollBarVisibility="Hidden">
+                            <Grid>
+                                <StackPanel Margin="0,10,0,0" VerticalAlignment="Top">
+                                    <AppBarButton Click="HomeButton_Click" Width="100" Icon="Home" Label=" 主页" Foreground="White" Style="{StaticResource AppBarButtonStyle}" />
+                                    <AppBarButton Click="ChannelButton_Click" Width="100" Icon="Bullets" Label=" 频道" Foreground="White" Style="{StaticResource AppBarButtonStyle}" />
+                                    <AppBarButton Click="RefreshButton_Click" Width="100" Icon="Refresh" Label=" 刷新" Foreground="White" Style="{StaticResource AppBarButtonStyle}" />
+                                </StackPanel>
+                                <StackPanel Margin="0,10,0,10" VerticalAlignment="Bottom">
+                                    <AppBarButton Click="UserButtonOnClick" Width="100" Icon="Contact" Label=" 用户" Foreground="White" Style="{StaticResource AppBarButtonStyle}"/>
+                                    <AppBarButton Click="marktReviewButton_Click" Width="120" Icon="Like" Label=" 好评" Foreground="White" Style="{StaticResource AppBarButtonStyle}"/>
+                                    <AppBarButton Click="SettingButtonOnClick" Width="100" Icon="Setting" Label=" 设置" Foreground="White" Style="{StaticResource AppBarButtonStyle}"/>
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </SplitView.Pane>
+                <SplitView.Content>
+                    <Grid>
+                        <control:ListViewBottomDetectControl x:Name="ChannelListView" ItemsSource="{Binding ChannelListData}" IsItemClickEnabled="True" 
+                                                             BottomArrived="ListView_OnBottomArrived" ItemClick="ListView_OnItemClick" 
+                                                             ItemTemplate="{StaticResource ChannelItemTemplate}" />
+                    </Grid>
+                </SplitView.Content>
+            </SplitView>
+            <ProgressRing Grid.Row="0" Grid.RowSpan="2" x:Name="FirstFrameProgressRing" IsActive="True" Foreground="#FF5BB75B" Width="100" Height="100"></ProgressRing>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Frame x:Name="SecondFrame">
+
+            </Frame>
+            <ProgressRing x:Name="SecondFrameProgressRing" IsActive="False" Foreground="#FF5BB75B" Width="100" Height="100"></ProgressRing>
+        </Grid>
+    </Grid>
+</Page>

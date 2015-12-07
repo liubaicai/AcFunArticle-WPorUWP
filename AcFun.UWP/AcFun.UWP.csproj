@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{9BF2A455-276D-49E3-B06C-D4E29A6F8CE7}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AcFun.UWP</RootNamespace>
+    <AssemblyName>AcFun.UWP</AssemblyName>
+    <DefaultLanguage>zh-CN</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>AcFun.UWP_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Never</AppxBundle>
+    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>67E1141DE4DB4C8273D67721BF543937146B8FB7</PackageCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="AcFun.UWP_StoreKey.pfx" />
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppData.cs" />
+    <Compile Include="Control\CommentBox.cs" />
+    <Compile Include="Control\CommentItemControl.xaml.cs">
+      <DependentUpon>CommentItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\CommentSubmit.xaml.cs">
+      <DependentUpon>CommentSubmit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\EmojiBox.xaml.cs">
+      <DependentUpon>EmojiBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ImgView.xaml.cs">
+      <DependentUpon>ImgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\LinqToTree\EnumerableTreeExtensions.cs" />
+    <Compile Include="Control\LinqToTree\ILinqTree.cs" />
+    <Compile Include="Control\LinqToTree\TreeExtensions.cs" />
+    <Compile Include="Control\LinqToTree\VisualTreeAdapter.cs" />
+    <Compile Include="Control\ListViewBottomDetectControl.cs" />
+    <Compile Include="Control\LoginBox.xaml.cs">
+      <DependentUpon>LoginBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\NotRepeatObservableCollection.cs" />
+    <Compile Include="Control\PopupFrame.cs" />
+    <Compile Include="Control\ToastPrompt.cs" />
+    <Compile Include="Helper\Cache.cs" />
+    <Compile Include="Helper\Cookie.cs" />
+    <Compile Include="Helper\Html.cs" />
+    <Compile Include="Helper\Http.cs" />
+    <Compile Include="Helper\Json.cs" />
+    <Compile Include="Helper\JxUtil\CommUtils.cs" />
+    <Compile Include="Helper\JxUtil\LunarUtil.cs" />
+    <Compile Include="Helper\JxUtil\ResultModel.cs" />
+    <Compile Include="Helper\Settings.cs" />
+    <Compile Include="Helper\Time.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AtListResult.cs" />
+    <Compile Include="Model\ChannelResult.cs" />
+    <Compile Include="Model\CollectionListResult.cs" />
+    <Compile Include="Model\CollectResult.cs" />
+    <Compile Include="Model\CommentListResult.cs" />
+    <Compile Include="Model\CommentSubmitResult.cs" />
+    <Compile Include="Model\InfoResult.cs" />
+    <Compile Include="Model\IsCollectResult.cs" />
+    <Compile Include="Model\LoginResult.cs" />
+    <Compile Include="Model\SearchResult.cs" />
+    <Compile Include="Model\UnReadResult.cs" />
+    <Compile Include="Module\Comment.cs" />
+    <Compile Include="Module\User.cs" />
+    <Compile Include="Pages\CommentListPage.xaml.cs">
+      <DependentUpon>CommentListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CommentPage.xaml.cs">
+      <DependentUpon>CommentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ContentPage.xaml.cs">
+      <DependentUpon>ContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserCenter.xaml.cs">
+      <DependentUpon>UserCenter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="AcFun.UWP_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\avatar-bg.png" />
+    <Content Include="Assets\avatar.jpg" />
+    <Content Include="Assets\back.jpg" />
+    <Content Include="Assets\Emoji\ac\01.png" />
+    <Content Include="Assets\Emoji\ac\02.png" />
+    <Content Include="Assets\Emoji\ac\03.png" />
+    <Content Include="Assets\Emoji\ac\04.png" />
+    <Content Include="Assets\Emoji\ac\05.png" />
+    <Content Include="Assets\Emoji\ac\06.png" />
+    <Content Include="Assets\Emoji\ac\07.png" />
+    <Content Include="Assets\Emoji\ac\08.png" />
+    <Content Include="Assets\Emoji\ac\09.png" />
+    <Content Include="Assets\Emoji\ac\10.png" />
+    <Content Include="Assets\Emoji\ac\11.png" />
+    <Content Include="Assets\Emoji\ac\12.png" />
+    <Content Include="Assets\Emoji\ac\13.png" />
+    <Content Include="Assets\Emoji\ac\14.png" />
+    <Content Include="Assets\Emoji\ac\15.png" />
+    <Content Include="Assets\Emoji\ac\16.png" />
+    <Content Include="Assets\Emoji\ac\17.png" />
+    <Content Include="Assets\Emoji\ac\18.png" />
+    <Content Include="Assets\Emoji\ac\19.png" />
+    <Content Include="Assets\Emoji\ac\20.png" />
+    <Content Include="Assets\Emoji\ac\21.png" />
+    <Content Include="Assets\Emoji\ac\22.png" />
+    <Content Include="Assets\Emoji\ac\23.png" />
+    <Content Include="Assets\Emoji\ac\24.png" />
+    <Content Include="Assets\Emoji\ac\25.png" />
+    <Content Include="Assets\Emoji\ac\26.png" />
+    <Content Include="Assets\Emoji\ac\27.png" />
+    <Content Include="Assets\Emoji\ac\28.png" />
+    <Content Include="Assets\Emoji\ac\29.png" />
+    <Content Include="Assets\Emoji\ac\30.png" />
+    <Content Include="Assets\Emoji\ac\31.png" />
+    <Content Include="Assets\Emoji\ac\32.png" />
+    <Content Include="Assets\Emoji\ac\33.png" />
+    <Content Include="Assets\Emoji\ac\34.png" />
+    <Content Include="Assets\Emoji\ac\35.png" />
+    <Content Include="Assets\Emoji\ac\36.png" />
+    <Content Include="Assets\Emoji\ac\37.png" />
+    <Content Include="Assets\Emoji\ac\38.png" />
+    <Content Include="Assets\Emoji\ac\39.png" />
+    <Content Include="Assets\Emoji\ac\40.png" />
+    <Content Include="Assets\Emoji\ac\41.png" />
+    <Content Include="Assets\Emoji\ac\42.png" />
+    <Content Include="Assets\Emoji\ac\43.png" />
+    <Content Include="Assets\Emoji\ac\44.png" />
+    <Content Include="Assets\Emoji\ac\45.png" />
+    <Content Include="Assets\Emoji\ac\46.png" />
+    <Content Include="Assets\Emoji\ac\47.png" />
+    <Content Include="Assets\Emoji\ac\48.png" />
+    <Content Include="Assets\Emoji\ac\49.png" />
+    <Content Include="Assets\Emoji\ac\50.png" />
+    <Content Include="Assets\Emoji\ac\51.png" />
+    <Content Include="Assets\Emoji\ac\52.png" />
+    <Content Include="Assets\Emoji\ac\53.png" />
+    <Content Include="Assets\Emoji\ac\54.png" />
+    <Content Include="Assets\Emoji\ais\01.png" />
+    <Content Include="Assets\Emoji\ais\02.png" />
+    <Content Include="Assets\Emoji\ais\03.png" />
+    <Content Include="Assets\Emoji\ais\04.png" />
+    <Content Include="Assets\Emoji\ais\05.png" />
+    <Content Include="Assets\Emoji\ais\06.png" />
+    <Content Include="Assets\Emoji\ais\07.png" />
+    <Content Include="Assets\Emoji\ais\08.png" />
+    <Content Include="Assets\Emoji\ais\09.png" />
+    <Content Include="Assets\Emoji\ais\10.png" />
+    <Content Include="Assets\Emoji\ais\11.png" />
+    <Content Include="Assets\Emoji\ais\12.png" />
+    <Content Include="Assets\Emoji\ais\13.png" />
+    <Content Include="Assets\Emoji\ais\14.png" />
+    <Content Include="Assets\Emoji\ais\15.png" />
+    <Content Include="Assets\Emoji\ais\16.png" />
+    <Content Include="Assets\Emoji\ais\17.png" />
+    <Content Include="Assets\Emoji\ais\18.png" />
+    <Content Include="Assets\Emoji\ais\19.png" />
+    <Content Include="Assets\Emoji\ais\20.png" />
+    <Content Include="Assets\Emoji\ais\21.png" />
+    <Content Include="Assets\Emoji\ais\22.png" />
+    <Content Include="Assets\Emoji\ais\23.png" />
+    <Content Include="Assets\Emoji\ais\24.png" />
+    <Content Include="Assets\Emoji\ais\25.png" />
+    <Content Include="Assets\Emoji\ais\26.png" />
+    <Content Include="Assets\Emoji\ais\27.png" />
+    <Content Include="Assets\Emoji\ais\28.png" />
+    <Content Include="Assets\Emoji\ais\29.png" />
+    <Content Include="Assets\Emoji\ais\30.png" />
+    <Content Include="Assets\Emoji\ais\31.png" />
+    <Content Include="Assets\Emoji\ais\32.png" />
+    <Content Include="Assets\Emoji\ais\33.png" />
+    <Content Include="Assets\Emoji\ais\34.png" />
+    <Content Include="Assets\Emoji\ais\35.png" />
+    <Content Include="Assets\Emoji\ais\36.png" />
+    <Content Include="Assets\Emoji\ais\37.png" />
+    <Content Include="Assets\Emoji\ais\38.png" />
+    <Content Include="Assets\Emoji\ais\39.png" />
+    <Content Include="Assets\Emoji\ais\40.png" />
+    <Content Include="Assets\Emoji\brd\01.png" />
+    <Content Include="Assets\Emoji\brd\02.png" />
+    <Content Include="Assets\Emoji\brd\03.png" />
+    <Content Include="Assets\Emoji\brd\04.png" />
+    <Content Include="Assets\Emoji\brd\05.png" />
+    <Content Include="Assets\Emoji\brd\06.png" />
+    <Content Include="Assets\Emoji\brd\07.png" />
+    <Content Include="Assets\Emoji\brd\08.png" />
+    <Content Include="Assets\Emoji\brd\09.png" />
+    <Content Include="Assets\Emoji\brd\10.png" />
+    <Content Include="Assets\Emoji\brd\11.png" />
+    <Content Include="Assets\Emoji\brd\12.png" />
+    <Content Include="Assets\Emoji\brd\13.png" />
+    <Content Include="Assets\Emoji\brd\14.png" />
+    <Content Include="Assets\Emoji\brd\15.png" />
+    <Content Include="Assets\Emoji\brd\16.png" />
+    <Content Include="Assets\Emoji\brd\17.png" />
+    <Content Include="Assets\Emoji\brd\18.png" />
+    <Content Include="Assets\Emoji\brd\19.png" />
+    <Content Include="Assets\Emoji\brd\20.png" />
+    <Content Include="Assets\Emoji\brd\21.png" />
+    <Content Include="Assets\Emoji\brd\22.png" />
+    <Content Include="Assets\Emoji\brd\23.png" />
+    <Content Include="Assets\Emoji\brd\24.png" />
+    <Content Include="Assets\Emoji\brd\25.png" />
+    <Content Include="Assets\Emoji\brd\26.png" />
+    <Content Include="Assets\Emoji\brd\27.png" />
+    <Content Include="Assets\Emoji\brd\28.png" />
+    <Content Include="Assets\Emoji\brd\29.png" />
+    <Content Include="Assets\Emoji\brd\30.png" />
+    <Content Include="Assets\Emoji\brd\31.png" />
+    <Content Include="Assets\Emoji\brd\32.png" />
+    <Content Include="Assets\Emoji\brd\33.png" />
+    <Content Include="Assets\Emoji\brd\34.png" />
+    <Content Include="Assets\Emoji\brd\35.png" />
+    <Content Include="Assets\Emoji\brd\36.png" />
+    <Content Include="Assets\Emoji\brd\37.png" />
+    <Content Include="Assets\Emoji\brd\38.png" />
+    <Content Include="Assets\Emoji\brd\39.png" />
+    <Content Include="Assets\Emoji\brd\40.png" />
+    <Content Include="Assets\Emoji\td\01.png" />
+    <Content Include="Assets\Emoji\td\02.png" />
+    <Content Include="Assets\Emoji\td\03.png" />
+    <Content Include="Assets\Emoji\td\04.png" />
+    <Content Include="Assets\Emoji\td\05.png" />
+    <Content Include="Assets\Emoji\td\06.png" />
+    <Content Include="Assets\Emoji\td\07.png" />
+    <Content Include="Assets\Emoji\td\08.png" />
+    <Content Include="Assets\Emoji\td\09.png" />
+    <Content Include="Assets\Emoji\td\10.png" />
+    <Content Include="Assets\Emoji\td\11.png" />
+    <Content Include="Assets\Emoji\td\12.png" />
+    <Content Include="Assets\Emoji\td\13.png" />
+    <Content Include="Assets\Emoji\td\14.png" />
+    <Content Include="Assets\Emoji\td\15.png" />
+    <Content Include="Assets\Emoji\td\16.png" />
+    <Content Include="Assets\Emoji\td\17.png" />
+    <Content Include="Assets\Emoji\td\18.png" />
+    <Content Include="Assets\Emoji\td\19.png" />
+    <Content Include="Assets\Emoji\td\20.png" />
+    <Content Include="Assets\Emoji\td\21.png" />
+    <Content Include="Assets\Emoji\td\22.png" />
+    <Content Include="Assets\Emoji\td\23.png" />
+    <Content Include="Assets\Emoji\td\24.png" />
+    <Content Include="Assets\Emoji\td\25.png" />
+    <Content Include="Assets\Emoji\td\26.png" />
+    <Content Include="Assets\Emoji\td\27.png" />
+    <Content Include="Assets\Emoji\td\28.png" />
+    <Content Include="Assets\Emoji\td\29.png" />
+    <Content Include="Assets\Emoji\td\30.png" />
+    <Content Include="Assets\Emoji\td\31.png" />
+    <Content Include="Assets\Emoji\td\32.png" />
+    <Content Include="Assets\Emoji\td\33.png" />
+    <Content Include="Assets\Emoji\td\34.png" />
+    <Content Include="Assets\Emoji\td\35.png" />
+    <Content Include="Assets\Emoji\td\36.png" />
+    <Content Include="Assets\Emoji\td\37.png" />
+    <Content Include="Assets\Emoji\td\38.png" />
+    <Content Include="Assets\Emoji\td\39.png" />
+    <Content Include="Assets\Emoji\td\40.png" />
+    <Content Include="Assets\Emoji\tsj\01.png" />
+    <Content Include="Assets\Emoji\tsj\02.png" />
+    <Content Include="Assets\Emoji\tsj\03.png" />
+    <Content Include="Assets\Emoji\tsj\04.png" />
+    <Content Include="Assets\Emoji\tsj\05.png" />
+    <Content Include="Assets\Emoji\tsj\06.png" />
+    <Content Include="Assets\Emoji\tsj\07.png" />
+    <Content Include="Assets\Emoji\tsj\08.png" />
+    <Content Include="Assets\Emoji\tsj\09.png" />
+    <Content Include="Assets\Emoji\tsj\10.png" />
+    <Content Include="Assets\Emoji\tsj\11.png" />
+    <Content Include="Assets\Emoji\tsj\12.png" />
+    <Content Include="Assets\Emoji\tsj\13.png" />
+    <Content Include="Assets\Emoji\tsj\14.png" />
+    <Content Include="Assets\Emoji\tsj\15.png" />
+    <Content Include="Assets\Emoji\tsj\16.png" />
+    <Content Include="Assets\Emoji\tsj\17.png" />
+    <Content Include="Assets\Emoji\tsj\18.png" />
+    <Content Include="Assets\Emoji\tsj\19.png" />
+    <Content Include="Assets\Emoji\tsj\20.png" />
+    <Content Include="Assets\Emoji\tsj\21.png" />
+    <Content Include="Assets\Emoji\tsj\22.png" />
+    <Content Include="Assets\Emoji\tsj\23.png" />
+    <Content Include="Assets\Emoji\tsj\24.png" />
+    <Content Include="Assets\Emoji\tsj\25.png" />
+    <Content Include="Assets\Emoji\tsj\26.png" />
+    <Content Include="Assets\Emoji\tsj\27.png" />
+    <Content Include="Assets\Emoji\tsj\28.png" />
+    <Content Include="Assets\Emoji\tsj\29.png" />
+    <Content Include="Assets\Emoji\tsj\30.png" />
+    <Content Include="Assets\Emoji\tsj\31.png" />
+    <Content Include="Assets\Emoji\tsj\32.png" />
+    <Content Include="Assets\Emoji\tsj\33.png" />
+    <Content Include="Assets\Emoji\tsj\34.png" />
+    <Content Include="Assets\Emoji\tsj\35.png" />
+    <Content Include="Assets\Emoji\tsj\36.png" />
+    <Content Include="Assets\Emoji\tsj\37.png" />
+    <Content Include="Assets\Emoji\tsj\38.png" />
+    <Content Include="Assets\Emoji\tsj\39.png" />
+    <Content Include="Assets\Emoji\tsj\40.png" />
+    <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Control\CommentItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\CommentSubmit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\EmojiBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\ImgView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\LoginBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CommentListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CommentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ContentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UserCenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ControlStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Resources\ItemTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="BaicaiAppService.SDK.UWP">
+      <HintPath>..\packages\BaicaiAppService.SDK.UWP.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

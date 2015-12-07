@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>**WindowsPhone8 Social SDK 快速集成指南**</title>
+</head>
+<body>
+<h1><strong>WindowsPhone8 Social SDK 快速集成指南</strong></h1>
+
+<h2>1 产品概述</h2>
+
+<p>友盟社会化组件，可以让移动应用快速具备社会化分享功能，并提供实时、全面的社会化数据统计分析服务。 <br>
+<strong>指南将会手把手教你使用社会化组件SDK，用5分钟为APP增加新浪微博、腾讯微博、人人网等平台分享功能。</strong></p>
+
+<blockquote>
+  <p>注意： <br>
+  本文示例代码均针对最新版SDK，如果你所用SDK的类名或方法名与此文不符合，请使用你所用SDK的随包文档、或者下载使用最新版SDK。</p>
+</blockquote>
+
+<h2>2 获取友盟Appkey</h2>
+
+<ul>
+<li><p>如果你之前已经在友盟注册了应用，并获取到了Appkey，可以继续使用它。   </p></li>
+<li><p>如果你尚未在友盟注册开发者账号，需要先<a href="http://www.umeng.com/users/sign_up" target="_blank">注册</a>，注册之后登录你的账号，点击<strong>添加新应用</strong>，填写完应用基本信息后，将进入"下载SDK并添加代码"页面，此页面即可得到<code>Appkey</code>。</p></li>
+</ul>
+
+<h2>3 下载并集成SDK</h2>
+
+<h3>[1] 下载SDK</h3>
+
+<p>下载的压缩包包含以下文件：  </p>
+
+<ul>
+<li>UmengSocialWP.dll：友盟的分享组件  </li>
+<li>UmImages：组件所需图片元素  </li>
+<li>Extent：特定平台所需库文件</li>
+</ul>
+
+<h3>[2] 导入SDK</h3>
+
+<p>如下图所示，右键点击工程的<strong>引用</strong>，在快捷菜单中选择<strong>添加引用</strong>，在打开的弹出框上点击<strong>浏览</strong>按钮，然后选择<strong>UmengSocialWP.dll</strong>文件。：</p>
+
+<p><img src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTQvMDEvMDYvMTZfMzRfMjBfMTBfYWRkcmVmZXJlbmNlLnBuZyJdXQ/addreference.png" alt="alt text" title=""> </p>
+
+<h3>[3] 导入图片</h3>
+
+<p>将UmImages复制到工程目录下，在VS内选中要添加到的项目，点击<strong>显示所有文件</strong>（右上方），这时工程内会显示虚线框的UmImages文件夹，右键点击UmImages文件夹，点击<strong>包括在项目中</strong>。</p>
+
+<p>设置导入图片的属性：  </p>
+
+<ul>
+<li>生成操作：内容  </li>
+<li>复制到输出目录：如果较新则复制</li>
+</ul>
+
+<h3>[4] 声明功能</h3>
+
+<p>双击VS内<strong>Properties</strong>文件夹下<strong>WMAppManifest.xml</strong>文件，切换到<strong>功能</strong>页，选中以下两项：  </p>
+
+<ul>
+<li>ID_CAP_NETWORKING：连接网络</li>
+<li>ID_CAP_IDENTITY_DEVICE：获取设备标识</li>
+<li>ID_CAP_LOCATION：定位</li>
+</ul>
+
+<h3>[5] 添加分享功能</h3>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code class="language-C#"><span class="kwd">using</span><span class="pln"> </span><span class="typ">UmengSocialSDK</span><span class="pun">;</span><span class="com">//首先声明命名空间</span></code></li><li class="L1"><code class="language-C#"><span class="pun">...</span></code></li><li class="L2"><code class="language-C#"></code></li><li class="L3"><code class="language-C#"><span class="typ">ShareData</span><span class="pln"> shareData </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ShareData</span><span class="pun">();</span></code></li><li class="L4"><code class="language-C#"></code></li><li class="L5"><code class="language-C#"><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Content</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"I am here~"</span><span class="pun">;</span><span class="pln">             </span></code></li><li class="L6"><code class="language-C#"><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">.</span><span class="typ">Link</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">@</span><span class="str">"http://v.yinyuetai.com/video/395495"</span><span class="pun">;</span></code></li><li class="L7"><code class="language-C#"><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">.</span><span class="typ">Type</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">UrlType</span><span class="pun">.</span><span class="typ">Music</span><span class="pun">;</span></code></li><li class="L8"><code class="language-C#"><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">.</span><span class="typ">Author</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"张学友"</span><span class="pun">;</span></code></li><li class="L9"><code class="language-C#"><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">.</span><span class="typ">Title</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"情书"</span><span class="pun">;</span></code></li><li class="L0"><code class="language-C#"></code></li><li class="L1"><code class="language-C#"><span class="typ">ShareOption</span><span class="pln"> option </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ShareOption</span><span class="pun">();</span><span class="pln">            </span></code></li><li class="L2"><code class="language-C#"><span class="pln">option</span><span class="pun">.</span><span class="typ">ShareCompleted</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> args </span><span class="pun">=&gt;</span></code></li><li class="L3"><code class="language-C#"><span class="pun">{</span></code></li><li class="L4"><code class="language-C#"><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">args</span><span class="pun">.</span><span class="typ">StatusCode</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="typ">UmengSocialSDK</span><span class="pun">.</span><span class="typ">UmEventArgs</span><span class="pun">.</span><span class="typ">Status</span><span class="pun">.</span><span class="typ">Successed</span><span class="pun">)</span></code></li><li class="L5"><code class="language-C#"><span class="pln">    </span><span class="pun">{</span></code></li><li class="L6"><code class="language-C#"><span class="pln">        </span><span class="com">//分享成功</span></code></li><li class="L7"><code class="language-C#"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L8"><code class="language-C#"><span class="pln">    </span><span class="kwd">else</span></code></li><li class="L9"><code class="language-C#"><span class="pln">    </span><span class="pun">{</span></code></li><li class="L0"><code class="language-C#"><span class="pln">        </span><span class="com">//分享失败                        </span></code></li><li class="L1"><code class="language-C#"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L2"><code class="language-C#"><span class="pun">};</span></code></li><li class="L3"><code class="language-C#"></code></li><li class="L4"><code class="language-C#"><span class="typ">UmengSocial</span><span class="pun">.</span><span class="typ">Share</span><span class="pun">(</span><span class="str">"Your_App_Key"</span><span class="pun">,</span><span class="pln"> shareData</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">,</span><span class="pln"> option</span><span class="pun">);</span></code></li></ol></pre>
+
+<blockquote>
+  <p>通过设置UmengSocial.Share的第三个参数可支持微信，具体步骤请参见第5节<strong>集成微信</strong>。</p>
+</blockquote>
+
+<h2>4 验证效果</h2>
+
+<p>编译并运行后，点击添加分享功能的按钮出现如下分享页，那么说明你已经集成成功了！ <br>
+以上操作步骤不能支持微信，若要支持微信需做一些额外工作，请参见下一节<strong>集成微信</strong>。</p>
+
+<table class="table table-striped-white table-bordered">
+<thead>
+<tr>
+  <th style="text-align:center;">授权页</th>
+  <th style="text-align:center;">分享编辑页</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td style="text-align:center;"><img src="http://github.umeng.com/analytics/sdk-documents/raw/master/components/social/SocialWP/Images/wp_platform.png" width="240" height="400"></td>
+  <td style="text-align:center;"><img src="http://github.umeng.com/analytics/sdk-documents/raw/master/components/social/SocialWP/Images/wp_share.png" width="240" height="400"></td>
+</tr>
+</tbody></table>
+
+
+<h2>5 集成微信</h2>
+
+<h3>[1] 申请微信的AppID</h3>
+
+<p>请到微信 开发者应用登记页面 进行登记，登记并选择移动应用进行设置后，将获得AppID，可立即用于开发。但应用登记完成后还需要提交审核，只有审核通过的应用才能正式发布使用。</p>
+
+<h3>[2] 导入微信SDK</h3>
+
+<p>按照3[2]的方法添加对以下文件的引用：</p>
+
+<table class="table table-striped-white table-bordered">
+<thead>
+<tr>
+  <th>库</th>
+  <th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>MicroMsgSDK.dll</td>
+  <td>微信的sdk库文件</td>
+</tr>
+<tr>
+  <td>Google.ProtocolBuffersLite.dll</td>
+  <td>Google的ProtocolBuffer开源库，用于序列化数据</td>
+</tr>
+</tbody></table>
+
+
+<h3>[3] 修改WMAppManifest.xml</h3>
+
+<p>右键点击应用的Properties下的WMAppManifest.xml，选择Open with...，然后选择Xml (Text) Editer打开该文件。在的前面，加上以下标签代码(如果你的文件中已经存在标签，则添加在已有的标签下)</p>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code class="language-xml"><span class="tag">&lt;Extensions&gt;</span></code></li><li class="L1"><code class="language-xml"><span class="pln">    </span><span class="tag">&lt;FileTypeAssociation</span><span class="pln"> </span><span class="atn">Name</span><span class="pun">=</span><span class="atv">"SDK_DEMO"</span><span class="pln"> </span><span class="atn">TaskID</span><span class="pun">=</span><span class="atv">"_default"</span><span class="pln"> </span><span class="atn">NavUriFragment</span><span class="pun">=</span><span class="atv">"fileToken=%s"</span><span class="tag">&gt;</span></code></li><li class="L2"><code class="language-xml"><span class="pln">        </span><span class="tag">&lt;SupportedFileTypes&gt;</span></code></li><li class="L3"><code class="language-xml"><span class="pln">          </span><span class="tag">&lt;FileType&gt;</span><span class="pln">.wxb6815fe9897c1f75</span><span class="tag">&lt;/FileType&gt;</span></code></li><li class="L4"><code class="language-xml"><span class="pln">          </span><span class="tag">&lt;FileType&gt;</span><span class="pln">.wechatapp</span><span class="tag">&lt;/FileType&gt;</span></code></li><li class="L5"><code class="language-xml"><span class="pln">        </span><span class="tag">&lt;/SupportedFileTypes&gt;</span></code></li><li class="L6"><code class="language-xml"><span class="pln">    </span><span class="tag">&lt;/FileTypeAssociation&gt;</span></code></li><li class="L7"><code class="language-xml"><span class="tag">&lt;/Extensions&gt;</span></code></li></ol></pre>
+
+<blockquote>
+  <p>上面Xml片段中有两处需要修改的，一个是Name="SDK_DEMO"，改成任意你喜欢的名字，两个支持的FileType，一个是.wechatapp， 另外一个是.wx3b34a14b66641dfd，其中“wx3b34a14b66641dfd”改成你在微信开放平台上登记应用时得到的AppID，这个务必要写对，不然微信拉不起你的应用。</p>
+</blockquote>
+
+<h3>[4] 编写微信入口Page类</h3>
+
+<p>继承WXEntryBasePage类，并覆写下表中的函数，来处理来自微信的响应，微信发送的数据，已经填到了参数中，可直接取用。注意：如果覆写OnNavigatedTo函数，需要调用base.OnNavigatedTo，以保证父类中的逻辑得以执行。</p>
+
+<table class="table table-striped-white table-bordered">
+<thead>
+<tr>
+  <th style="text-align:left;">接口名称</th>
+  <th style="text-align:left;">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td style="text-align:left;">void On_SendMessageToWX_Response(SendMessageToWX.Resp response)</td>
+  <td style="text-align:left;">从你的应用发送消息给微信后，微信会发回一个成功或失败的响应，如果不关注是否成功，可直接GoBack处理</td>
+</tr>
+</tbody></table>
+
+
+<h3>[4] 继承系统的UriMapperBase类</h3>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="kwd">class</span><span class="pln"> </span><span class="typ">AssociationUriMapper</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="typ">UriMapperBase</span></code></li><li class="L1"><code><span class="pun">{</span></code></li><li class="L2"><code><span class="pln">    </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">string</span><span class="pln"> tempUri</span><span class="pun">;</span></code></li><li class="L3"><code><span class="pln">    </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">override</span><span class="pln"> </span><span class="typ">Uri</span><span class="pln"> </span><span class="typ">MapUri</span><span class="pun">(</span><span class="typ">Uri</span><span class="pln"> uri</span><span class="pun">)</span></code></li><li class="L4"><code><span class="pln">    </span><span class="pun">{</span></code></li><li class="L5"><code><span class="pln">        tempUri </span><span class="pun">=</span><span class="pln"> uri</span><span class="pun">.</span><span class="typ">ToString</span><span class="pun">();</span></code></li><li class="L6"><code><span class="pln">        </span><span class="com">// 根据文件类型打开程序</span></code></li><li class="L7"><code><span class="pln">        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">tempUri</span><span class="pun">.</span><span class="typ">Contains</span><span class="pun">(</span><span class="str">"/FileTypeAssociation"</span><span class="pun">))</span></code></li><li class="L8"><code><span class="pln">        </span><span class="pun">{</span></code></li><li class="L9"><code><span class="pln">            </span><span class="com">// 获取fileID (after "fileToken=").</span></code></li><li class="L0"><code><span class="pln">            </span><span class="kwd">int</span><span class="pln"> fileIDIndex </span><span class="pun">=</span><span class="pln"> tempUri</span><span class="pun">.</span><span class="typ">IndexOf</span><span class="pun">(</span><span class="str">"fileToken="</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">10</span><span class="pun">;</span></code></li><li class="L1"><code><span class="pln">            </span><span class="kwd">string</span><span class="pln"> fileID </span><span class="pun">=</span><span class="pln"> tempUri</span><span class="pun">.</span><span class="typ">Substring</span><span class="pun">(</span><span class="pln">fileIDIndex</span><span class="pun">);</span></code></li><li class="L2"><code><span class="pln">            </span><span class="com">// 获取文件名.</span></code></li><li class="L3"><code><span class="pln">            </span><span class="kwd">string</span><span class="pln"> incommingFileName </span><span class="pun">=</span><span class="pln"> </span><span class="typ">SharedStorageAccessManager</span><span class="pun">.</span><span class="typ">GetSharedFileName</span><span class="pun">(</span><span class="pln">fileID</span><span class="pun">);</span></code></li><li class="L4"><code><span class="pln">            </span><span class="com">// 获取文件后缀</span></code></li><li class="L5"><code><span class="pln">            </span><span class="kwd">int</span><span class="pln"> extensionIndex </span><span class="pun">=</span><span class="pln"> incommingFileName</span><span class="pun">.</span><span class="typ">LastIndexOf</span><span class="pun">(</span><span class="str">'.'</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span></code></li><li class="L6"><code><span class="pln">            </span><span class="kwd">string</span><span class="pln"> incommingFileType </span><span class="pun">=</span><span class="pln"> incommingFileName</span><span class="pun">.</span><span class="typ">Substring</span><span class="pun">(</span><span class="pln">extensionIndex</span><span class="pun">).</span><span class="typ">ToLower</span><span class="pun">();</span></code></li><li class="L7"><code><span class="pln">            </span><span class="com">// 根据不同文件类型，跳转不同参数的地址</span></code></li><li class="L8"><code><span class="pln">            </span><span class="kwd">switch</span><span class="pln"> </span><span class="pun">(</span><span class="pln">incommingFileType</span><span class="pun">)</span></code></li><li class="L9"><code><span class="pln">            </span><span class="pun">{</span></code></li><li class="L0"><code><span class="pln">                </span><span class="kwd">case</span><span class="pln"> </span><span class="str">"wx3b34a14b66641dfd"</span><span class="pun">:</span></code></li><li class="L1"><code><span class="pln">                    </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Uri</span><span class="pun">(</span><span class="str">"/DemoEntryPage.xaml?fileToken="</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> fileID</span><span class="pun">,</span><span class="pln"> </span><span class="typ">UriKind</span><span class="pun">.</span><span class="typ">Relative</span><span class="pun">);</span></code></li><li class="L2"><code><span class="pln">                </span><span class="kwd">default</span><span class="pun">:</span></code></li><li class="L3"><code><span class="pln">                    </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Uri</span><span class="pun">(</span><span class="str">"/MainPage.xaml"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">UriKind</span><span class="pun">.</span><span class="typ">Relative</span><span class="pun">);</span></code></li><li class="L4"><code><span class="pln">            </span><span class="pun">}</span></code></li><li class="L5"><code><span class="pln">        </span><span class="pun">}</span></code></li><li class="L6"><code><span class="pln">        </span><span class="kwd">else</span></code></li><li class="L7"><code><span class="pln">        </span><span class="pun">{</span></code></li><li class="L8"><code><span class="pln">            </span><span class="kwd">return</span><span class="pln"> uri</span><span class="pun">;</span></code></li><li class="L9"><code><span class="pln">        </span><span class="pun">}</span></code></li><li class="L0"><code><span class="pln">    </span><span class="pun">}</span></code></li><li class="L1"><code><span class="pun">}</span></code></li></ol></pre>
+
+<blockquote>
+  <p>case "wx3b34a14b66641dfd": 改成你的AppID。 <br>
+  /DemoEntryPage.xaml?fileToken=" 改成步骤[3]中继承WXEntryBasePage的Page的路径。</p>
+</blockquote>
+
+<h3>[5] 修改App.xaml.cs文件</h3>
+
+<p>然后在App.xaml.cs的InitializePhoneApplication()函数中，增加一行代码：</p>
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="com">// Assign the URI-mapper class to the application frame.</span></code></li><li class="L1"><code><span class="typ">RootFrame</span><span class="pun">.</span><span class="typ">UriMapper</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">AssociationUriMapper</span><span class="pun">();</span></code></li></ol></pre>
+
+<h3>[6] 添加支持微信的分享功能</h3>
+
+<p><strong>class WxPlatformInfo</strong></p>
+
+<table class="table table-striped-white table-bordered">
+<thead>
+<tr>
+  <th>成员</th>
+  <th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>AppId</td>
+  <td>从微信申请的应用Id</td>
+</tr>
+<tr>
+  <td>Type</td>
+  <td>分享的数据类型：Text(文本), Picture(图片), Url(链接)</td>
+</tr>
+<tr>
+  <td>Title</td>
+  <td>分享内容的标题</td>
+</tr>
+<tr>
+  <td>Description</td>
+  <td>对分享内容的描述</td>
+</tr>
+</tbody></table>
+
+
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code class="language-C#"><span class="typ">ShareData</span><span class="pln"> shareData </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ShareData</span><span class="pun">();</span></code></li><li class="L1"><code class="language-C#"></code></li><li class="L2"><code class="language-C#"><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">.</span><span class="typ">Link</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">@</span><span class="str">"http://v.yinyuetai.com/video/395495"</span><span class="pun">;</span></code></li><li class="L3"><code class="language-C#"><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">.</span><span class="typ">Type</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">UrlType</span><span class="pun">.</span><span class="typ">Music</span><span class="pun">;</span></code></li><li class="L4"><code class="language-C#"><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">.</span><span class="typ">Author</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"张学友"</span><span class="pun">;</span></code></li><li class="L5"><code class="language-C#"><span class="pln">shareData</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">.</span><span class="typ">Title</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"情书"</span><span class="pun">;</span></code></li><li class="L6"><code class="language-C#"></code></li><li class="L7"><code class="language-C#"><span class="typ">WxPlatformInfo</span><span class="pln"> wxInfo </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">WxPlatformInfo</span><span class="pun">()</span></code></li><li class="L8"><code class="language-C#"><span class="pun">{</span></code></li><li class="L9"><code class="language-C#"><span class="pln">    </span><span class="com">//微信必须设置以下四项</span></code></li><li class="L0"><code class="language-C#"><span class="pln">    </span><span class="typ">AppId</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">AppConfig</span><span class="pun">.</span><span class="typ">WxAppId</span><span class="pun">,</span></code></li><li class="L1"><code class="language-C#"><span class="pln">    </span><span class="typ">Type</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">DataType</span><span class="pun">.</span><span class="typ">Url</span><span class="pun">,</span><span class="pln"> </span><span class="com">//注意此处一定要设置正确的类型</span></code></li><li class="L2"><code class="language-C#"><span class="pln">    </span><span class="typ">Title</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"友盟社会化组件"</span><span class="pun">,</span></code></li><li class="L3"><code class="language-C#"><span class="pln">    </span><span class="typ">Description</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">"From WindowsPhone"</span></code></li><li class="L4"><code class="language-C#"><span class="pun">};</span></code></li><li class="L5"><code class="language-C#"></code></li><li class="L6"><code class="language-C#"><span class="kwd">var</span><span class="pln"> dic </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Dictionary</span><span class="pun">&lt;</span><span class="typ">SharePlatform</span><span class="pun">,</span><span class="pln"> </span><span class="typ">PlatformInfo</span><span class="pun">&gt;();</span></code></li><li class="L7"><code class="language-C#"><span class="pln">dic</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">SharePlatform</span><span class="pun">.</span><span class="typ">Wechat</span><span class="pun">,</span><span class="pln"> wxInfo</span><span class="pun">);</span></code></li><li class="L8"><code class="language-C#"><span class="pln">dic</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="typ">SharePlatform</span><span class="pun">.</span><span class="typ">Wxcircle</span><span class="pun">,</span><span class="pln"> wxInfo</span><span class="pun">);</span></code></li><li class="L9"><code class="language-C#"></code></li><li class="L0"><code class="language-C#"><span class="typ">UmengSocial</span><span class="pun">.</span><span class="typ">Share</span><span class="pun">(</span><span class="str">"Your_App_Key"</span><span class="pun">,</span><span class="pln"> shareData</span><span class="pun">,</span><span class="pln"> dic</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">,</span><span class="pln"> args </span><span class="pun">=&gt;</span></code></li><li class="L1"><code class="language-C#"><span class="pun">{</span></code></li><li class="L2"><code class="language-C#"><span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">args</span><span class="pun">.</span><span class="typ">StatusCode</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="typ">UmengSocialSDK</span><span class="pun">.</span><span class="typ">UmEventArgs</span><span class="pun">.</span><span class="typ">Status</span><span class="pun">.</span><span class="typ">Successed</span><span class="pun">)</span></code></li><li class="L3"><code class="language-C#"><span class="pln">    </span><span class="pun">{</span></code></li><li class="L4"><code class="language-C#"><span class="pln">        </span><span class="com">//分享成功</span></code></li><li class="L5"><code class="language-C#"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L6"><code class="language-C#"><span class="pln">    </span><span class="kwd">else</span></code></li><li class="L7"><code class="language-C#"><span class="pln">    </span><span class="pun">{</span><span class="pln">    </span></code></li><li class="L8"><code class="language-C#"><span class="pln">        </span><span class="com">//分享失败                    </span></code></li><li class="L9"><code class="language-C#"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L0"><code class="language-C#"><span class="pun">});</span></code></li></ol></pre>
+
+<blockquote>
+  <p><strong>微信集成需要注意以下几点：</strong></p>
+  
+  <ul>
+  <li>在测试的时候，确保你安装的WP8的微信(4.0以上版本)  </li>
+  <li>不要在Demo的上修改来形成你的应用程序，因为如果其他人跟你一样做  ，你们的AppStore上的AppID是一样的。  </li>
+  <li>开发者的应用需要通过审核。开发者在申请应用必须要通过微信官网的审核才能进行调试. </li>
+  </ul>
+</blockquote>
+
+<h2>6 进阶使用</h2>
+
+<p>如果上述文档不能满足您的分享需求，请移步至“详细集成文档”。</p>
+</body>
+</html>

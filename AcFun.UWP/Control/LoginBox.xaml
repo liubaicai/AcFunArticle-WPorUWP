@@ -1,0 +1,30 @@
+﻿<ContentDialog
+    x:Class="AcFun.UWP.Control.LoginBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AcFun.UWP.Control"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="登录"
+    PrimaryButtonText="确定"
+    SecondaryButtonText="取消"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <Grid>
+        <StackPanel Margin="0,10,0,0">
+            <TextBox x:Name="UserNameBox"></TextBox>
+            <Border Height="10"></Border>
+            <PasswordBox x:Name="PassWordBox"></PasswordBox>
+            <Border Height="10"></Border>
+            <StackPanel Orientation="Horizontal" x:Name="CaptchaGrid" Visibility="Collapsed">
+                <TextBox Width="150" x:Name="CaptchaBox" VerticalAlignment="Center"></TextBox>
+                <Image x:Name="Captcha" HorizontalAlignment="Right" Height="50"></Image>
+            </StackPanel>
+            <Grid>
+                <TextBlock x:Name="NoticeBlock" Foreground="Red" HorizontalAlignment="Left"></TextBlock>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</ContentDialog>

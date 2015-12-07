@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="AcFun.UWP.Pages.SettingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AcFun.UWP.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uwp="using:BaicaiAppService.SDK.UWP"
+    mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Margin="20">
+            <TextBlock FontSize="25" Foreground="Gray" Text="说明"></TextBlock>
+            <Border Height="10"></Border>
+            <TextBlock FontSize="18" Foreground="#FFAAAAAA" Text="AcFun文章区第三方客户端"></TextBlock>
+            <TextBlock FontSize="18" Foreground="#FFAAAAAA" Text="本应用不作为任何盈利目的使用"></TextBlock>
+            <TextBlock FontSize="18" Foreground="#FFAAAAAA" Text="应用反馈Q群:373715806"></TextBlock>
+            <Border Height="20"></Border>
+            <uwp:AppListView Margin="-10,0" Foreground="#FFDDDDDD"/>
+        </StackPanel>
+    </Grid>
+</Page>

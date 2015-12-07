@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="AcFunBlue.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AcFunBlue"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <DataTemplate x:Key="ListStyle">
+            <Grid Margin="20,0,20,10">
+                <StackPanel>
+                    <Grid>
+                        <Grid Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" Height="60">
+                            <Border Background="#FF5CB65C"/>
+                            <TextBlock Foreground="White" Text="{Binding dis}" FontSize="30" HorizontalAlignment="Right" Margin="0,-3,0,0"/>
+                            <TextBlock Foreground="White" Text="评论" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="18"/>
+                        </Grid>
+                        <StackPanel Margin="70,-5,0,0">
+                            <TextBlock Text="{Binding title}" Margin="0" FontSize="18" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                            <TextBlock FontSize="12" Margin="0,5,0,0">
+                                    <Run Text="{Binding name}"/>
+                                    <Run Text="{Binding time}"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                    <TextBlock Text="{Binding beizhu}" Opacity="0.5" Margin="30,2,0,0" FontSize="12" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Compact">
+            <AppBarButton Label="返回顶部" Icon="Upload" Click="Up_AppBt_Click"/>
+            <AppBarButton Label="分区" Icon="List" Click="List_AppBt_Click"/>
+            <AppBarButton Label="刷新" Icon="Refresh" Click="Refresh_AppBt_Click"/>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="bt_about" Label="关于" Click="bt_about_Click"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid Margin="0,-28,0,0">
+        <Pivot>
+            <Pivot.Title>
+                <TextBlock x:Uid="Header" Text="AcFun文章区" FontSize="16" FontFamily="DengXian" Margin="0,10,0,10"/>
+            </Pivot.Title>
+            <PivotItem Margin="0,10,0,0">
+                <PivotItem.Header>
+                    <TextBlock Text="{Binding Title}" FontSize="45" FontFamily="DengXian"/>
+                </PivotItem.Header>
+                <Grid>
+                    <ListView x:Name="listView" ItemsSource="{Binding ListData}" ItemTemplate="{StaticResource ListStyle}" Background="{x:Null}"/>
+                </Grid>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="个人中心" FontSize="45" FontFamily="DengXian"/>
+                </PivotItem.Header>
+                <Grid/>
+            </PivotItem>
+        </Pivot>
+        <ProgressRing IsActive="{Binding Busy}" Foreground="White" Background="{x:Null}" />
+    </Grid>
+</Page>
