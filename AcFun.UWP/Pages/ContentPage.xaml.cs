@@ -36,6 +36,7 @@ namespace AcFun.UWP.Pages
 
         public ContentPage()
         {
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             this.InitializeComponent();
         }
 

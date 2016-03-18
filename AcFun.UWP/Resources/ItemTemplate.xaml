@@ -113,11 +113,11 @@
             <StackPanel Grid.Column="2" Margin="0,-3,0,0">
                 <Grid>
                     <TextBlock Opacity="0.5">
-                        <Run Text="#"></Run>
-                        <Run x:Name="CommentCount" Text="{Binding Count}"></Run>
+                        <Run Text="#" Foreground="Black"></Run>
+                        <Run x:Name="CommentCount" Text="{Binding Count}" Foreground="Black"></Run>
                         <Run x:Name="CommentName" Text="{Binding UserName}" Foreground="{Binding NameRedColor}"></Run>
-                        <Run Text="发表于"></Run>
-                        <Run x:Name="CommentTime" Text="{Binding PostDate}"></Run>
+                        <Run Text="发表于" Foreground="Black"></Run>
+                        <Run x:Name="CommentTime" Text="{Binding PostDate}" Foreground="Black"></Run>
                     </TextBlock>
                 </Grid>
                 <control:CommentBox x:Name="CommentContent" Text="{Binding ContentShow}" Opacity="0.8"></control:CommentBox>

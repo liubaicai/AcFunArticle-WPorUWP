@@ -468,9 +468,17 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Baicai.UWP.Tools">
+      <HintPath>..\packages\Baicai.UWP.Tools.dll</HintPath>
+    </Reference>
     <Reference Include="BaicaiAppService.SDK.UWP">
       <HintPath>..\packages\BaicaiAppService.SDK.UWP.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

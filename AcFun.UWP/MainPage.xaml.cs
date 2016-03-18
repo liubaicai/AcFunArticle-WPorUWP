@@ -23,6 +23,7 @@ using AcFun.UWP.Control;
 using AcFun.UWP.Helper;
 using AcFun.UWP.Model;
 using AcFun.UWP.Pages;
+using Baicai.UWP.Tools.Helpers;
 using BaicaiMobileService.Helper;
 using User = AcFun.UWP.Module.User;
 
@@ -86,9 +87,16 @@ namespace AcFun.UWP
 
         public MainPage()
         {
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             Instance = this;
             this.DataContext = this;
             this.InitializeComponent();
+            if (PlatformHelper.IsMobile)
+            {
+                IsCanCloseSplitView = true;
+                FirstFrame.Width = Window.Current.Bounds.Width;
+                SecondGrid.Visibility = Visibility.Collapsed;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -151,19 +159,48 @@ namespace AcFun.UWP
             var channelBindingModel = e.ClickedItem as ChannelBindingModel;
             if (channelBindingModel != null)
             {
-                while (SecondFrame.CanGoBack)
+                if (PlatformHelper.IsMobile)
                 {
-                    SecondFrame.GoBack();
+                    FirstFrameProgressRing.IsActive = true;
+                    var result = await Cache.GetCachedHtml(channelBindingModel.ContentId);
+                    FirstFrameProgressRing.IsActive = false;
+                    if (!string.IsNullOrEmpty(result))
+                    {
+                        channelBindingModel.NotifyPropertyChanged("TitleForeground");
+                        var obj = result.ToJsonObject<InfoResult.Rootobject>();
+                        if (obj.Success)
+                        {
+                            App.RootFrame.Navigate(typeof(ContentPage), obj.Data.FullArticle);
+                        }
+                        else
+                        {
+                            await new MessageDialog(obj.Msg).ShowAsync();
+                        }
+                    }
                 }
-                SecondFrameProgressRing.IsActive = true;
-                var result = await Cache.GetCachedHtml(channelBindingModel.ContentId);
-                if (!string.IsNullOrEmpty(result))
+                else
                 {
-                    channelBindingModel.NotifyPropertyChanged("TitleForeground");
-                    var obj = result.ToJsonObject<InfoResult.Rootobject>();
-                    SecondFrame.Navigate(typeof(ContentPage), obj.Data.FullArticle);
+                    while (SecondFrame.CanGoBack)
+                    {
+                        SecondFrame.GoBack();
+                    }
+                    SecondFrameProgressRing.IsActive = true;
+                    var result = await Cache.GetCachedHtml(channelBindingModel.ContentId);
+                    if (!string.IsNullOrEmpty(result))
+                    {
+                        channelBindingModel.NotifyPropertyChanged("TitleForeground");
+                        var obj = result.ToJsonObject<InfoResult.Rootobject>();
+                        if (obj.Success)
+                        {
+                            SecondFrame.Navigate(typeof(ContentPage), obj.Data.FullArticle);
+                        }
+                        else
+                        {
+                            await new MessageDialog(obj.Msg).ShowAsync();
+                        }
+                    }
+                    SecondFrameProgressRing.IsActive = false;
                 }
-                SecondFrameProgressRing.IsActive = false;
             }
         }
 
@@ -176,8 +213,11 @@ namespace AcFun.UWP
                 md.Commands.Add(new UICommand("工作·情感", ChannelSelectAction, 73));
             if (ChannelId != 74)
                 md.Commands.Add(new UICommand("动漫·文化", ChannelSelectAction, 74));
-            if (ChannelId != 75)
-                md.Commands.Add(new UICommand("漫画·轻小说", ChannelSelectAction, 75));
+            if (!PlatformHelper.IsMobile)
+            {
+                if (ChannelId != 75)
+                    md.Commands.Add(new UICommand("漫画·轻小说", ChannelSelectAction, 75));
+            }
             await md.ShowAsync();
         }
 
@@ -194,14 +234,28 @@ namespace AcFun.UWP
 
         private void SettingButtonOnClick(object sender, RoutedEventArgs e)
         {
-            PopupFrame.Instance350.Show(typeof(SettingPage));
+            if (PlatformHelper.IsMobile)
+            {
+                App.RootFrame.Navigate(typeof(SettingPage));
+            }
+            else
+            {
+                PopupFrame.Instance350.Show(typeof(SettingPage));
+            }
         }
 
         private async void UserButtonOnClick(object sender, RoutedEventArgs e)
         {
             if (User.IsLogin)
             {
-                PopupFrame.Instance.Show(typeof(UserCenter));
+                if (PlatformHelper.IsMobile)
+                {
+                    App.RootFrame.Navigate(typeof(UserCenter));
+                }
+                else
+                {
+                    PopupFrame.Instance.Show(typeof(UserCenter));
+                }
             }
             else
             {

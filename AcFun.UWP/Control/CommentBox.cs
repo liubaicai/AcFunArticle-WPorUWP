@@ -263,7 +263,7 @@ namespace AcFun.UWP.Control
 
             if (nextOffset < htmlFragment.Length)
             {
-                paragraph.Inlines.Add(new Run { Text = Html.NoTag(htmlFragment.Substring(nextOffset)) });
+                paragraph.Inlines.Add(new Run { Text = Html.NoTag(htmlFragment.Substring(nextOffset)), Foreground = new SolidColorBrush(Colors.Black) });
             }
         }
     }

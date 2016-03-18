@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 using AcFun.UWP.Control;
 using AcFun.UWP.Helper;
 using AcFun.UWP.Model;
+using Baicai.UWP.Tools.Helpers;
 using BaicaiMobileService.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
@@ -43,12 +45,17 @@ namespace AcFun.UWP.Pages
 
         public CommentPage()
         {
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             this.InitializeComponent();
             this.DataContext = this;
             Instance = this;
+            if (!PlatformHelper.IsMobile)
+            {
+                ContentGrid.MaxWidth = 800;
+            }
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
@@ -139,7 +146,14 @@ namespace AcFun.UWP.Pages
             var model = e.ClickedItem as CommentBindingModel;
             if (model?.CommentContentList[model.CommentId].ParentId > 0)
             {
-                PopupFrame.Instance.Show(typeof(CommentListPage), e.ClickedItem);
+                if (PlatformHelper.IsMobile)
+                {
+                    App.RootFrame.Navigate(typeof(CommentListPage), e.ClickedItem);
+                }
+                else
+                {
+                    PopupFrame.Instance.Show(typeof(CommentListPage), e.ClickedItem);
+                }
             }
         }
     }

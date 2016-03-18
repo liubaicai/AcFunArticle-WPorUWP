@@ -25,6 +25,7 @@ namespace AcFun.UWP.Pages
     {
         public CommentListPage()
         {
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             this.InitializeComponent();
             this.DataContext = this;
         }
@@ -40,11 +41,15 @@ namespace AcFun.UWP.Pages
                 {
                     var list = new List<CommentBindingItemModel>();
                     var modelid = param.CommentId;
-                    list.Add(param.CommentContentList[modelid]);
-                    while (param.CommentContentList[modelid].ParentId > 0)
+                    if (param.CommentContentList.ContainsKey(modelid))
                     {
-                        modelid = param.CommentContentList[modelid].ParentId;
                         list.Add(param.CommentContentList[modelid]);
+                        while (param.CommentContentList.ContainsKey(modelid) && param.CommentContentList[modelid].ParentId > 0)
+                        {
+                            modelid = param.CommentContentList[modelid].ParentId;
+                            if (param.CommentContentList.ContainsKey(modelid))
+                                list.Add(param.CommentContentList[modelid]);
+                        }
                     }
                     list.Reverse();
                     CommentList.ItemsSource = list;

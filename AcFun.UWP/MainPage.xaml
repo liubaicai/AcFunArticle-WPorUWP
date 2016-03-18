@@ -40,12 +40,12 @@
                 </VisualState>
                 <VisualState x:Name="narrow">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="400" />
+                        <AdaptiveTrigger MinWindowWidth="500" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="SplitViewControl.DisplayMode" Value="Overlay" />
                         <Setter Target="SplitViewControl.IsPaneOpen" Value="False" />
-                        <Setter Target="FirstFrame.Width" Value="300" />
+                        <Setter Target="FirstFrame.Width" Value="432" />
                         <Setter Target="HamburgButton.Width" Value="50" />
                         <Setter Target="ThisPage.IsCanCloseSplitView" Value="True" />
                     </VisualState.Setters>
@@ -121,7 +121,7 @@
             <ProgressRing Grid.Row="0" Grid.RowSpan="2" x:Name="FirstFrameProgressRing" IsActive="True" Foreground="#FF5BB75B" Width="100" Height="100"></ProgressRing>
         </Grid>
 
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" x:Name="SecondGrid">
             <Frame x:Name="SecondFrame">
 
             </Frame>

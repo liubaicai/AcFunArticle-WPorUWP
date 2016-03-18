@@ -8,7 +8,10 @@
     xmlns:control="using:AcFun.UWP.Control"
     mc:Ignorable="d">
 
-    <Grid Background="Transparent">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/Assets/back.jpg"/>
+        </Grid.Background>
         <control:ListViewBottomDetectControl x:Name="CommentList" ItemTemplate="{StaticResource CommentListItemTemplate}"/>
     </Grid>
 </Page>

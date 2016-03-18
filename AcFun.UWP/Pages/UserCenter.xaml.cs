@@ -37,6 +37,7 @@ namespace AcFun.UWP.Pages
 
         public UserCenter()
         {
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             this.InitializeComponent();
         }
 

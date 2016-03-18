@@ -24,6 +24,7 @@ namespace AcFun.UWP.Pages
     {
         public SettingPage()
         {
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             this.InitializeComponent();
         }
     }
