@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <StoreAssociation xmlns="http://schemas.microsoft.com/appx/2010/storeassociation">
+  <Dependencies>
+    <MemoryDependency MinForeground="300MB" />
+  </Dependencies>
   <Publisher>CN=0F1DE075-8808-41AD-9E18-2920D00C5BA7</Publisher>
   <PublisherDisplayName>刘白菜</PublisherDisplayName>
   <GeneratePackageHash>http://www.w3.org/2001/04/xmlenc#sha256</GeneratePackageHash>
