@@ -27,7 +27,7 @@
             <ScrollViewer>
                 <StackPanel Margin="15,10">
                     <RichTextBlock Visibility="Collapsed" x:Name="ContentRichBlock"></RichTextBlock>
-                    <control:ListViewBottomDetectControl Visibility="Collapsed" Padding="0" Margin="-12,0" x:Name="ContentListView">
+                    <control:ListViewBottomDetectControl Visibility="Collapsed" Padding="0" Margin="0" x:Name="ContentListView">
                         <control:ListViewBottomDetectControl.Resources>
                             <DataTemplate x:Key="ContentItemDataTemplate">
                                 <Grid>

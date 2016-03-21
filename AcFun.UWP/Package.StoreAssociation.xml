@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <StoreAssociation xmlns="http://schemas.microsoft.com/appx/2010/storeassociation">
-  <Dependencies>
-    <MemoryDependency MinForeground="300MB" />
-  </Dependencies>
   <Publisher>CN=0F1DE075-8808-41AD-9E18-2920D00C5BA7</Publisher>
   <PublisherDisplayName>刘白菜</PublisherDisplayName>
   <GeneratePackageHash>http://www.w3.org/2001/04/xmlenc#sha256</GeneratePackageHash>
@@ -361,13 +358,14 @@
     <Language Code="zu-za" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>65186.AcFun</MainPackageIdentityName>
+    <MainPackageIdentityName>65186.AcFunBeta</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>AcFun文章区</ReservedName>
+      <ReservedName>AcFun文章区 Beta</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
     <MainPackageIdentityName>65186.133264F9E39E2</MainPackageIdentityName>
+    <MainPackageIdentityName>65186.AcFun</MainPackageIdentityName>
     <MainPackageIdentityName>65186.WIFI</MainPackageIdentityName>
     <MainPackageIdentityName>65186.47288FFBC7DE2</MainPackageIdentityName>
     <MainPackageIdentityName>65186.3512F5B0FE59</MainPackageIdentityName>
@@ -378,5 +376,5 @@
     <MainPackageIdentityName>65186.4103298871E47</MainPackageIdentityName>
     <MainPackageIdentityName>65186.PRO</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9WZDNCRDPRZP" />
+  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH4RC3T" />
 </StoreAssociation>
