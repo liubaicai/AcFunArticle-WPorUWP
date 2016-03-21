@@ -5,6 +5,7 @@
     xmlns:local="using:AcFun.UWP.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:control="using:AcFun.UWP.Control"
     mc:Ignorable="d">
 
     <Grid>
@@ -25,7 +26,20 @@
         <Grid Row="1">
             <ScrollViewer>
                 <StackPanel Margin="15,10">
-                    <RichTextBlock x:Name="ContentRichBlock"></RichTextBlock>
+                    <RichTextBlock Visibility="Collapsed" x:Name="ContentRichBlock"></RichTextBlock>
+                    <control:ListViewBottomDetectControl Visibility="Collapsed" Padding="0" Margin="-12,0" x:Name="ContentListView">
+                        <control:ListViewBottomDetectControl.Resources>
+                            <DataTemplate x:Key="ContentItemDataTemplate">
+                                <Grid>
+                                    <Image Source="{Binding Url}" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Str}" FontSize="16" LineHeight="24" TextWrapping="Wrap" Foreground="#FF222222"></TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </control:ListViewBottomDetectControl.Resources>
+                        <control:ListViewBottomDetectControl.ItemTemplate>
+                            <StaticResource ResourceKey="ContentItemDataTemplate"/>
+                        </control:ListViewBottomDetectControl.ItemTemplate>
+                    </control:ListViewBottomDetectControl>
                     <Frame x:Name="CommentFrame"></Frame>
                 </StackPanel>
             </ScrollViewer>

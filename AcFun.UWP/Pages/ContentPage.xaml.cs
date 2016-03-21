@@ -21,6 +21,7 @@ using AcFun.UWP.Model;
 using BaicaiMobileService.Helper;
 using AcFun.UWP.Module;
 using Windows.System;
+using Baicai.UWP.Tools.Helpers;
 using User = AcFun.UWP.Module.User;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
@@ -102,10 +103,22 @@ namespace AcFun.UWP.Pages
 
         private void SetContent(string txt)
         {
-            ContentRichBlock.Blocks.Clear();
-            foreach (var block in Html.GetContent(txt))
+            if (PlatformHelper.IsMobile)
             {
-                ContentRichBlock.Blocks.Add(block);
+                ContentListView.Visibility = Visibility.Visible;
+                ContentRichBlock.Visibility = Visibility.Collapsed;
+                var data = Html.GetHtmlContent(txt);
+                ContentListView.ItemsSource = data;
+            }
+            else
+            {
+                ContentListView.Visibility = Visibility.Collapsed;
+                ContentRichBlock.Visibility = Visibility.Visible;
+                ContentRichBlock.Blocks.Clear();
+                foreach (var block in Html.GetContent(txt))
+                {
+                    ContentRichBlock.Blocks.Add(block);
+                }
             }
         }
 

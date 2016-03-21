@@ -20,6 +20,41 @@ namespace AcFun.UWP.Helper
 {
     public class Html
     {
+        public static List<HtmlContent> GetHtmlContent(string txt)
+        {
+            txt = txt.Replace("<div", "<p").Replace("</div>", "</p>");
+            var list = new List<HtmlContent>();
+
+            var regEx = new Regex(
+                @"(\<p.*?\>)(?<text>.*?)(\<\/p\>|$)",
+                RegexOptions.IgnoreCase | RegexOptions.Singleline);
+            foreach (Match match in regEx.Matches(txt))
+            {
+                var item = match.Groups["text"].Value.Trim();
+                if (item.Contains("<img"))
+                {
+                    var paragraph = new Paragraph();
+                    var regImg = new Regex(
+                        @"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>",
+                        RegexOptions.IgnoreCase);
+                    foreach (Match matchImg in regImg.Matches(item))
+                    {
+                        list.Add(HtmlContent.Create(matchImg.Groups["imgUrl"].Value.Trim(), null));
+                    }
+                }
+                else if (item.Contains("<span"))
+                {
+                    list.Add(HtmlContent.Create(null, NoHTML(item)));
+                }
+                else
+                {
+                    list.Add(HtmlContent.Create(null, NoHTML(item)));
+                }
+            }
+
+            return list;
+        }
+
         public static List<Block> GetContent(string txt)
         {
             txt = txt.Replace("<div", "<p").Replace("</div>", "</p>");
@@ -177,6 +212,17 @@ namespace AcFun.UWP.Helper
             Htmlstring = Htmlstring.Replace("[/font]", "");
 
             return Htmlstring;
+        }
+
+        public class HtmlContent
+        {
+            public static HtmlContent Create(string url, string str)
+            {
+                return new HtmlContent() {Url = url, Str = str };
+            }
+
+            public string Url { get; set; }
+            public string Str { get; set; }
         }
     }
 }
