@@ -51,7 +51,7 @@ namespace AcFun.UWP.Pages
             Instance = this;
             if (!PlatformHelper.IsMobile)
             {
-                ContentGrid.MaxWidth = 800;
+                ContentGrid.MinWidth = 800;
             }
         }
 
