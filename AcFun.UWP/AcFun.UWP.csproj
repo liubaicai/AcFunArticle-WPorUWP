@@ -403,6 +403,7 @@
     <None Include="Package.StoreAssociation.xml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Assets\SplashScreen.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
