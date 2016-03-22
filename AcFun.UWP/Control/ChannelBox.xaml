@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Height="220"
+    Height="250"
     Width="300">
 
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -16,6 +16,7 @@
             <Button Content="工作·情感" Tag="73" Margin="5" HorizontalAlignment="Center" Click="ButtonBase_OnClick"></Button>
             <Button Content="动漫·文化" Tag="74" Margin="5" HorizontalAlignment="Center" Click="ButtonBase_OnClick"></Button>
             <Button Content="漫画·轻小说" Tag="75" Margin="5" HorizontalAlignment="Center" Click="ButtonBase_OnClick"></Button>
+            <Button Content="游戏" Tag="164" Margin="5" HorizontalAlignment="Center" Click="ButtonBase_OnClick"></Button>
         </StackPanel>
     </Grid>
 </ContentDialog>
