@@ -206,26 +206,34 @@ namespace AcFun.UWP
 
         private async void ChannelButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageDialog md = new MessageDialog("选择频道");
-            if (ChannelId != 110)
-                md.Commands.Add(new UICommand("综合", ChannelSelectAction, 110));
-            if (ChannelId != 73)
-                md.Commands.Add(new UICommand("工作·情感", ChannelSelectAction, 73));
-            if (ChannelId != 74)
-                md.Commands.Add(new UICommand("动漫·文化", ChannelSelectAction, 74));
-            if (!PlatformHelper.IsMobile)
+            //MessageDialog md = new MessageDialog("选择频道");
+            //if (ChannelId != 110)
+            //    md.Commands.Add(new UICommand("综合", ChannelSelectAction, 110));
+            //if (ChannelId != 73)
+            //    md.Commands.Add(new UICommand("工作·情感", ChannelSelectAction, 73));
+            //if (ChannelId != 74)
+            //    md.Commands.Add(new UICommand("动漫·文化", ChannelSelectAction, 74));
+            //if (!PlatformHelper.IsMobile)
+            //{
+            //    if (ChannelId != 75)
+            //        md.Commands.Add(new UICommand("漫画·轻小说", ChannelSelectAction, 75));
+            //}
+            //await md.ShowAsync();
+
+            var channelBox = new ChannelBox();
+            channelBox.ChannelSelectedAction = i =>
             {
-                if (ChannelId != 75)
-                    md.Commands.Add(new UICommand("漫画·轻小说", ChannelSelectAction, 75));
-            }
-            await md.ShowAsync();
+                ChannelId = i;
+                GetChannelListData(true);
+            };
+            await channelBox.ShowAsync();
         }
 
-        private void ChannelSelectAction(IUICommand command)
-        {
-            ChannelId = (int)command.Id;
-            GetChannelListData(true);
-        }
+        //private void ChannelSelectAction(IUICommand command)
+        //{
+        //    ChannelId = (int)command.Id;
+        //    GetChannelListData(true);
+        //}
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {

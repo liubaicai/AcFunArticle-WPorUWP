@@ -106,6 +106,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppData.cs" />
+    <Compile Include="Control\ChannelBox.xaml.cs">
+      <DependentUpon>ChannelBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\CommentBox.cs" />
     <Compile Include="Control\CommentItemControl.xaml.cs">
       <DependentUpon>CommentItemControl.xaml</DependentUpon>
@@ -412,6 +415,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Control\ChannelBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\CommentItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
