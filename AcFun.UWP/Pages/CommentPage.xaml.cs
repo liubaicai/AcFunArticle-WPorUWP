@@ -55,7 +55,7 @@ namespace AcFun.UWP.Pages
             }
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
@@ -64,7 +64,7 @@ namespace AcFun.UWP.Pages
                 Id = int.Parse(e.Parameter?.ToString());
                 if (Id > 0)
                 {
-                    await LoadMore(PageCount + 1);
+                    Refresh();
                 }
             }
         }

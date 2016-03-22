@@ -400,7 +400,9 @@
     <Content Include="Assets\Emoji\tsj\38.png" />
     <Content Include="Assets\Emoji\tsj\39.png" />
     <Content Include="Assets\Emoji\tsj\40.png" />
-    <None Include="Package.StoreAssociation.xml" />
+    <None Include="Package.StoreAssociation.xml">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
