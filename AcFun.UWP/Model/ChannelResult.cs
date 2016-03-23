@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Net;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,10 @@ namespace AcFun.UWP.Model
     public class ChannelBindingModel : ChannelResult.List, INotifyPropertyChanged
     {
         public string TimeStr => Time.getTime(ReleaseDate).ToString("MM.dd HH:mm:ss");
+
+        public string TitleStr => WebUtility.HtmlDecode(Title);
+
+        public string DescriptionShow => WebUtility.HtmlDecode(Description.Replace("<br/>", ""));
 
         public Brush TitleForeground
         {
@@ -33,8 +38,6 @@ namespace AcFun.UWP.Model
                 }
             }
         }
-
-        public string DescriptionShow => Description.Replace("<br/>", "");
 
 
         public event PropertyChangedEventHandler PropertyChanged;

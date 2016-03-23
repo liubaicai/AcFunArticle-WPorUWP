@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
@@ -50,8 +51,8 @@ namespace AcFun.UWP.Pages
                 Model = e.Parameter as InfoBindingModel;
                 if (Model != null)
                 {
-                    MainTitle.Text = Model.Title;
-                    SubHeader.Text = Model.SubHeader;
+                    MainTitle.Text = WebUtility.HtmlDecode(Model.Title);
+                    SubHeader.Text = WebUtility.HtmlDecode(Model.SubHeader);
                     SetContent(Model.Txt);
                     CommentFrame.Navigate(typeof(CommentPage), Model.ContentId);
                     Comment.Instance.QuoteId = -1;

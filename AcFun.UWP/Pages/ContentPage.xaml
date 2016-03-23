@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
         <Grid Row="0">
             <StackPanel>
-                <TextBlock Margin="5,0,0,0" x:Name="MainTitle" Foreground="#FF4B565E" FontSize="19"></TextBlock>
+                <TextBlock Margin="5,0,0,0" x:Name="MainTitle" Foreground="#FF4B565E" FontSize="19" TextWrapping="Wrap"></TextBlock>
                 <TextBlock Margin="15,5,0,5" x:Name="SubHeader" Foreground="#FF9fABB3" FontSize="12"></TextBlock>
             </StackPanel>
         </Grid>
@@ -27,7 +27,7 @@
             <ScrollViewer>
                 <StackPanel Margin="15,10">
                     <RichTextBlock Visibility="Collapsed" x:Name="ContentRichBlock"></RichTextBlock>
-                    <control:ListViewBottomDetectControl Visibility="Collapsed" Padding="0" Margin="0" x:Name="ContentListView">
+                    <control:ListViewBottomDetectControl Visibility="Collapsed" Padding="0" Margin="0" x:Name="ContentListView" IsHitTestVisible="False">
                         <control:ListViewBottomDetectControl.Resources>
                             <DataTemplate x:Key="ContentItemDataTemplate">
                                 <Grid>

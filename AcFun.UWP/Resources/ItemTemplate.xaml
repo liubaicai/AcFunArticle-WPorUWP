@@ -30,7 +30,7 @@
                     </Grid>
                     <StackPanel Grid.Column="1" Margin="10,-2,0,0">
                         <TextBlock FontSize="14" Foreground="{Binding TitleForeground}"
-                                   Text="{Binding Title}"
+                                   Text="{Binding TitleStr}"
                                    TextWrapping="Wrap" />
                         <TextBlock Margin="0,3,0,0" FontSize="12">
                             <Run Text="{Binding User.Username}" Foreground="#FFCC6666" />
