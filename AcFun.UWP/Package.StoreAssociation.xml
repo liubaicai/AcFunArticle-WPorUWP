@@ -358,16 +358,17 @@
     <Language Code="zu-za" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>65186.AcFunBeta</MainPackageIdentityName>
+    <MainPackageIdentityName>65186.AcFun</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>AcFun文章区 Beta</ReservedName>
+      <ReservedName>AcFun文章区</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
     <MainPackageIdentityName>65186.133264F9E39E2</MainPackageIdentityName>
-    <MainPackageIdentityName>65186.AcFun</MainPackageIdentityName>
+    <MainPackageIdentityName>65186.AcFunBeta</MainPackageIdentityName>
     <MainPackageIdentityName>65186.WIFI</MainPackageIdentityName>
     <MainPackageIdentityName>65186.47288FFBC7DE2</MainPackageIdentityName>
+    <MainPackageIdentityName>65186.4095605BE029F</MainPackageIdentityName>
     <MainPackageIdentityName>65186.3512F5B0FE59</MainPackageIdentityName>
     <MainPackageIdentityName>65186.15047F3AF9958</MainPackageIdentityName>
     <MainPackageIdentityName>65186.4668253C32C27</MainPackageIdentityName>
@@ -376,5 +377,5 @@
     <MainPackageIdentityName>65186.4103298871E47</MainPackageIdentityName>
     <MainPackageIdentityName>65186.PRO</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH4RC3T" />
+  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9WZDNCRDPRZP" />
 </StoreAssociation>
