@@ -216,10 +216,6 @@ namespace ACFUN
                 switch (pivot.SelectedIndex)
                 {
                     case 1:
-                        if (apps == null || apps.Count == 0)
-                        {
-                            getApps();
-                        }
                         break;
                     case 2:
                         await getunRead();
@@ -274,25 +270,10 @@ namespace ACFUN
                     "数据开关",
                     "最最最最便捷的数据/手机网络开关"));
                 list.Add(AppMethod.CreateApp(
-                    "http://pic.weifengke.com/attachments/1/1998/af984beba223208a57cfac14fe4aaf1e.jpg",
-                    "b9f794d8-312f-4e2a-9e34-8a22db254015",
-                    "AcFun社区",
-                    "官方匿名版客户端猴子偷懒不更新啦"));
-                list.Add(AppMethod.CreateApp(
-                    "http://pic.weifengke.com/attachments/0/185/a6f3c96fe96ee9e22ae9ee7dfe1200de.jpg",
-                    "86f26f7d-c4de-4a49-ac51-9ae63fc334f6",
-                    "微疯客手机助手",
-                    "最好用的WP玩家社区应用推荐平台"));
-                list.Add(AppMethod.CreateApp(
                     "http://pic.weifengke.com/attachments/1/1792/e2dfdcb33449eca927c54e353b24ca06.jpg",
                     "3de1c61d-b456-48a3-bedb-04201a1cdf17",
                     "哎？手电筒",
                     "最快捷的手电筒要啥自行车啊"));
-                //list.Add(AppMethod.CreateApp(
-                //    "http://pic.weifengke.com/attachments/2/2627/1c1f90ca4c113351529da8c0dc36ebf3.jpg",
-                //    "8ce13a86-7450-4938-9ec0-5701b3a40c8c",
-                //    "爱音悦",
-                //    "手机必备mv神器音悦台我的最♂爱"));
             }
             return list;
         }
