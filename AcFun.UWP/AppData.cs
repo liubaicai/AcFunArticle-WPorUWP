@@ -12,8 +12,9 @@ namespace AcFun.UWP
         #region URL地址 
         /// <summary>
         /// 列表地址(GET)
+        /// http://api.aixifan.com/searches/channel?sort=4&pageNo=1&pageSize=20&channelIds=110
         /// </summary>
-        public static string ContentChannelUrl => "http://api.acfun.tv/apiserver/content/channel?pageSize=20&channelId={0}&pageNo={1}&_=" + Time.getTimeSpan();
+        public static string ContentChannelUrl => "http://api.aixifan.com/searches/channel?sort=4&pageSize=20&channelIds={0}&pageNo={1}&_=" + Time.getTimeSpan();
 
         /// <summary>
         /// 详情地址(GET)

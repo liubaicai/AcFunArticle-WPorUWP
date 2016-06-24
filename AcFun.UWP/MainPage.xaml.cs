@@ -129,7 +129,7 @@ namespace AcFun.UWP
                 ChannelListData.Clear();
                 FirstFrameProgressRing.IsActive = true;
             }
-            var data = obj?.Data?.Page?.List;
+            var data = obj?.Data?.List;
             if (data != null&& data.Any())
             {
                 foreach (var item in data)

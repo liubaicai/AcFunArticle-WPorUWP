@@ -89,15 +89,15 @@ namespace ACFUN
                                 {
                                     int tmpLenght = 1200;
                                     string tmpStr = s.Trim();
-                                    for (int i = 0; i <= tmpStr.Length / tmpLenght; i++)
+                                    for (int i = 0; i <= tmpStr.Length/tmpLenght; i++)
                                     {
-                                        if ((i + 1) * tmpLenght > tmpStr.Length)
+                                        if ((i + 1)*tmpLenght > tmpStr.Length)
                                         {
-                                            list.Add(tmpStr.Substring(i * tmpLenght, tmpStr.Length % tmpLenght));
+                                            list.Add(tmpStr.Substring(i*tmpLenght, tmpStr.Length%tmpLenght));
                                         }
                                         else
                                         {
-                                            list.Add(tmpStr.Substring(i * tmpLenght, tmpLenght));
+                                            list.Add(tmpStr.Substring(i*tmpLenght, tmpLenght));
                                         }
                                     }
                                 }
@@ -143,7 +143,11 @@ namespace ACFUN
                         count = count + flag;
                     }
 
-                    using (var stream = await new HttpHelp().Get(string.Format(StaticData.iscollection, StaticData.acitem.href.Remove(0, 5))))
+                    using (
+                        var stream =
+                            await
+                                new HttpHelp().Get(string.Format(StaticData.iscollection,
+                                    StaticData.acitem.href.Remove(0, 5))))
                     {
                         var sr = new StreamReader(stream);
                         if (sr.ReadToEnd().Contains("true"))
@@ -153,7 +157,11 @@ namespace ACFUN
                     }
                 }
             }
-            catch (Exception) { MessageBox.Show("出错啦！多半是网络&服务器问题啦~"); }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MessageBox.Show("出错啦！多半是网络&服务器问题啦~");
+            }
             indicator.IsVisible = false;
         }
 

@@ -345,13 +345,14 @@ namespace ACFUN
             Debug.WriteLine(url);
             var request = (HttpWebRequest)WebRequest.Create(new Uri(url));
             request.UserAgent = @"Mozilla/5.0 (Windows NT 10.0; WOW64) Chrome/45.0.2454.101";
+            request.Headers["deviceType"] = "1";
             var response = await request.GetResponseAsync();
             using (var stream = response.GetResponseStream())
             {
                 var result = new StreamReader(stream).ReadToEnd();
                 Debug.WriteLine(result);
                 var obj = JObject.Parse(result);
-                var pages = obj["data"]["page"]["list"];
+                var pages = obj["data"]["list"];
                 
                 foreach (var item in pages)
                 {

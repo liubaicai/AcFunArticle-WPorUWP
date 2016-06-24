@@ -24,10 +24,11 @@
         #region api参数
         public static string versionapi = "http://acfun.liubaicai.com/version.html";
 
-        public static string list1 = "http://api.acfun.tv/apiserver/content/channel?pageSize=20&channelId=110&pageNo={0}&_={1}";
-        public static string list2 = "http://api.acfun.tv/apiserver/content/channel?pageSize=20&channelId=73&pageNo={0}&_={1}";
-        public static string list3 = "http://api.acfun.tv/apiserver/content/channel?pageSize=20&channelId=74&pageNo={0}&_={1}";
-        public static string list4 = "http://api.acfun.tv/apiserver/content/channel?pageSize=20&channelId=75&pageNo={0}&_={1}";
+        //http://api.aixifan.com/searches/channel?sort=4&pageNo=1&pageSize=20&channelIds=110
+        public static string list1 = "http://api.aixifan.com/searches/channel?sort=4&pageSize=20&channelIds=110&pageNo={0}&_={1}";
+        public static string list2 = "http://api.aixifan.com/searches/channel?sort=4&pageSize=20&channelIds=73&pageNo={0}&_={1}";
+        public static string list3 = "http://api.aixifan.com/searches/channel?sort=4&pageSize=20&channelIds=74&pageNo={0}&_={1}";
+        public static string list4 = "http://api.aixifan.com/searches/channel?sort=4&pageSize=20&channelIds=75&pageNo={0}&_={1}";
 
         public static string login = "http://m.acfun.tv/login.aspx?username={0}&password={1}";
         public static string logout = "http://www.acfun.tv/logout.aspx";

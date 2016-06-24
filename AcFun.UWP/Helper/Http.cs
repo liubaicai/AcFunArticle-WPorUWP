@@ -19,6 +19,7 @@ namespace AcFun.UWP.Helper
                 http.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36");
                 http.DefaultRequestHeaders.Add("Accept-Encoding", "deflate, sdch");
                 http.DefaultRequestHeaders.Add("Accept-Language", "zh-CN,zh;q=0.8");
+                http.DefaultRequestHeaders.Add("deviceType", "1");
                 return http;
             }
         }
@@ -32,6 +33,7 @@ namespace AcFun.UWP.Helper
                 http.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36");
                 http.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, sdch");
                 http.DefaultRequestHeaders.Add("Accept-Language", "zh-CN,zh;q=0.8");
+                http.DefaultRequestHeaders.Add("deviceType", "1");
                 return http;
             }
         }

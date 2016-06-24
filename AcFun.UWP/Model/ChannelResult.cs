@@ -51,6 +51,9 @@ namespace AcFun.UWP.Model
     {
         public class Rootobject
         {
+            [DataMember(Name = "code")]
+            public bool Code { get; set; }
+
             [DataMember(Name = "success")]
             public bool Success { get; set; }
 
@@ -61,13 +64,7 @@ namespace AcFun.UWP.Model
             public int Status { get; set; }
 
             [DataMember(Name = "data")]
-            public Data Data { get; set; }
-        }
-
-        public class Data
-        {
-            [DataMember(Name = "page")]
-            public Page Page { get; set; }
+            public Page Data { get; set; }
         }
 
         public class Page
