@@ -148,7 +148,7 @@ namespace AcFun.UWP.Pages
                 if (!string.IsNullOrEmpty(result))
                 {
                     var obj = result.ToJsonObject<InfoResult.Rootobject>();
-                    MainPage.Instance.SFrame.Navigate(typeof(ContentPage), obj.Data.FullArticle);
+                    MainPage.Instance.SFrame.Navigate(typeof(ContentPage), obj.data);
                     //PopupFrame.Instance.Hide();
                 }
                 MainPage.Instance.SFrameProgressRing.IsActive = false;

@@ -51,10 +51,10 @@ namespace AcFun.UWP.Pages
                 Model = e.Parameter as InfoBindingModel;
                 if (Model != null)
                 {
-                    MainTitle.Text = WebUtility.HtmlDecode(Model.Title);
+                    MainTitle.Text = WebUtility.HtmlDecode(Model.title);
                     SubHeader.Text = WebUtility.HtmlDecode(Model.SubHeader);
-                    SetContent(Model.Txt);
-                    CommentFrame.Navigate(typeof(CommentPage), Model.ContentId);
+                    SetContent(Model.article.content);
+                    CommentFrame.Navigate(typeof(CommentPage), Model.contentId);
                     Comment.Instance.QuoteId = -1;
                 }
                 Comment.Instance.QuoteFloorChanged += QuoteFloorChanged;
@@ -69,7 +69,7 @@ namespace AcFun.UWP.Pages
             {
                 if (isNet)
                 {
-                    var url = string.Format(AppData.IsCollectUrl, Model.ContentId);
+                    var url = string.Format(AppData.IsCollectUrl, Model.contentId);
                     var str = await Http.Instance.GetStringAsync(url);
                     var obj = str.ToJsonObject<IsCollectResult.Rootobject>();
                     if (obj.Success)
@@ -140,7 +140,7 @@ namespace AcFun.UWP.Pages
         private async void CommentSubmitShow(object sender, LoginResult.Rootobject rootobject)
         {
             (sender as LoginBox)?.Hide();
-            CommentSubmit cs = new CommentSubmit(Model.ContentId);
+            CommentSubmit cs = new CommentSubmit(Model.contentId);
             cs.SubmitCompleted += (o, b) =>
             {
                 CommentPage.Instance.Refresh();
@@ -150,7 +150,7 @@ namespace AcFun.UWP.Pages
 
         private async void DeleteSoButton_OnClick(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri("http://www.delete.so/search.html?search=ac" + Model.ContentId));
+            await Launcher.LaunchUriAsync(new Uri("http://www.delete.so/search.html?search=ac" + Model.contentId));
         }
 
         private async void FavoriteButton_OnClick(object sender, RoutedEventArgs e)
@@ -162,8 +162,8 @@ namespace AcFun.UWP.Pages
             }
             if (FavoriteButton.Label == "收藏")
             {
-                var content = new StringContent($"operate=1&cId={Model.ContentId}");
-                var url = string.Format(AppData.CollectUrl + $"?operate=1&cId={Model.ContentId}");
+                var content = new StringContent($"operate=1&cId={Model.contentId}");
+                var url = string.Format(AppData.CollectUrl + $"?operate=1&cId={Model.contentId}");
                 var response = await Http.Instance.PostAsync(url, content);
                 var str = await response.Content.ReadAsStringAsync();
                 var obj = str.ToJsonObject<CommonResult.Rootobject>();
@@ -179,8 +179,8 @@ namespace AcFun.UWP.Pages
             }
             else
             {
-                var content = new StringContent($"operate=0&cId={Model.ContentId}");
-                var url = string.Format(AppData.CollectUrl + $"?operate=0&cId={Model.ContentId}");
+                var content = new StringContent($"operate=0&cId={Model.contentId}");
+                var url = string.Format(AppData.CollectUrl + $"?operate=0&cId={Model.contentId}");
                 var response = await Http.Instance.PostAsync(url, content);
                 var str = await response.Content.ReadAsStringAsync();
                 var obj = str.ToJsonObject<CommonResult.Rootobject>();

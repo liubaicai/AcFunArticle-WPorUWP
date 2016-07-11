@@ -17,9 +17,9 @@ namespace AcFun.UWP
         public static string ContentChannelUrl => "http://api.aixifan.com/searches/channel?sort=4&pageSize=20&channelIds={0}&pageNo={1}&_=" + Time.getTimeSpan();
 
         /// <summary>
-        /// 详情地址(GET)
+        /// 详情地址(GET)http://api.aixifan.com/contents/2883833
         /// </summary>
-        public static string ContentInfoUrl => "http://api.acfun.tv/apiserver/content/info?contentId={0}&_=" + Time.getTimeSpan();
+        public static string ContentInfoUrl => "http://api.aixifan.com/contents/{0}?_=" + Time.getTimeSpan();
 
         /// <summary>
         /// 评论地址(GET)

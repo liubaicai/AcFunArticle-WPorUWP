@@ -9,10 +9,10 @@ using AcFun.UWP.Helper;
 
 namespace AcFun.UWP.Model
 {
-    public class InfoBindingModel : InfoResult.Fullarticle, INotifyPropertyChanged
+    public class InfoBindingModel : InfoResult.Data, INotifyPropertyChanged
     {
-        public string SubHeader => 
-            $"{User.Username} / 发布于{Time.getTime(ReleaseDate).ToString("yyyy年M月d(dddd) hh时mm分")} / 点击:{Views}  评论:{Comments}  收藏:{Stows}";
+        public string SubHeader =>
+            $"{owner.name} / 发布于{Time.getTime(releaseDate).ToString("yyyy年M月d(dddd) hh时mm分")} / 点击:{visit.views}  评论:{visit.comments}  收藏:{visit.stows}";
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propertyName)
@@ -25,89 +25,55 @@ namespace AcFun.UWP.Model
     {
         public class Rootobject
         {
-            [DataMember(Name = "success")]
-            public bool Success { get; set; }
-
-            [DataMember(Name = "msg")]
-            public string Msg { get; set; }
-
-            [DataMember(Name = "status")]
-            public int Status { get; set; }
-
-            [DataMember(Name = "data")]
-            public Data Data { get; set; }
+            public int code { get; set; }
+            public InfoBindingModel data { get; set; }
+            public string message { get; set; }
         }
 
         public class Data
         {
-            [DataMember(Name = "fullArticle")]
-            public InfoBindingModel FullArticle { get; set; }
+            public Article article { get; set; }
+            public int channelId { get; set; }
+            public int contentId { get; set; }
+            public string cover { get; set; }
+            public string description { get; set; }
+            public int display { get; set; }
+            public int isArticle { get; set; }
+            public int isRecommend { get; set; }
+            public Owner owner { get; set; }
+            public long releaseDate { get; set; }
+            public int status { get; set; }
+            public string[] tags { get; set; }
+            public string title { get; set; }
+            public int topLevel { get; set; }
+            public long updatedAt { get; set; }
+            public int viewOnly { get; set; }
+            public Visit visit { get; set; }
         }
 
-        public class Fullarticle
+        public class Article
         {
-            [DataMember(Name = "user")]
-            public User User { get; set; }
-
-            [DataMember(Name = "tags")]
-            public string[] Tags { get; set; }
-
-            [DataMember(Name = "txt")]
-            public string Txt { get; set; }
-
-            [DataMember(Name = "contentId")]
-            public int ContentId { get; set; }
-
-            [DataMember(Name = "releaseDate")]
-            public long ReleaseDate { get; set; }
-
-            [DataMember(Name = "isArticle")]
-            public int IsArticle { get; set; }
-
-            [DataMember(Name = "channelId")]
-            public int ChannelId { get; set; }
-
-            [DataMember(Name = "title")]
-            public string Title { get; set; }
-
-            [DataMember(Name = "cover")]
-            public string Cover { get; set; }
-
-            [DataMember(Name = "views")]
-            public int Views { get; set; }
-
-            [DataMember(Name = "stows")]
-            public int Stows { get; set; }
-
-            [DataMember(Name = "comments")]
-            public int Comments { get; set; }
-
-            [DataMember(Name = "isRecommend")]
-            public int IsRecommend { get; set; }
-
-            [DataMember(Name = "toplevel")]
-            public int TopLevel { get; set; }
-
-            [DataMember(Name = "viewOnly")]
-            public int ViewOnly { get; set; }
-
-            [DataMember(Name = "tudouDomain")]
-            public int TudouDomain { get; set; }
-
-            [DataMember(Name = "description")]
-            public string Description { get; set; }
+            public string content { get; set; }
         }
 
-        public class User
+        public class Owner
         {
-            [DataMember(Name = "userId")]
-            public int UserId { get; set; }
+            public string avatar { get; set; }
+            public int id { get; set; }
+            public string name { get; set; }
+        }
 
-            [DataMember(Name = "userImg")]
-            public string UserImg { get; set; }
-
-            [DataMember(Name = "username")]
-            public string Username { get; set; }
+        public class Visit
+        {
+            public int comments { get; set; }
+            public int danmakuSize { get; set; }
+            public int goldBanana { get; set; }
+            public int score { get; set; }
+            public int stows { get; set; }
+            public int ups { get; set; }
+            public int views { get; set; }
         }
     }
+
+
 }

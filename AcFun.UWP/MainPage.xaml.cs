@@ -168,13 +168,13 @@ namespace AcFun.UWP
                     {
                         channelBindingModel.NotifyPropertyChanged("TitleForeground");
                         var obj = result.ToJsonObject<InfoResult.Rootobject>();
-                        if (obj.Success)
+                        if (obj.code == 200)
                         {
-                            App.RootFrame.Navigate(typeof(ContentPage), obj.Data.FullArticle);
+                            App.RootFrame.Navigate(typeof(ContentPage), obj.data);
                         }
                         else
                         {
-                            await new MessageDialog(obj.Msg).ShowAsync();
+                            await new MessageDialog(obj.message).ShowAsync();
                         }
                     }
                 }
@@ -190,13 +190,13 @@ namespace AcFun.UWP
                     {
                         channelBindingModel.NotifyPropertyChanged("TitleForeground");
                         var obj = result.ToJsonObject<InfoResult.Rootobject>();
-                        if (obj.Success)
+                        if (obj.code == 200)
                         {
-                            SecondFrame.Navigate(typeof(ContentPage), obj.Data.FullArticle);
+                            SecondFrame.Navigate(typeof(ContentPage), obj.data);
                         }
                         else
                         {
-                            await new MessageDialog(obj.Msg).ShowAsync();
+                            await new MessageDialog(obj.message).ShowAsync();
                         }
                     }
                     SecondFrameProgressRing.IsActive = false;

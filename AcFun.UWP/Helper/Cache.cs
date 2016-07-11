@@ -20,9 +20,9 @@ namespace AcFun.UWP.Helper
             try
             {
                 var http = Http.Instance;
-                var str = await http.GetStringAsync(string.Format(AppData.ContentInfoUrl, contentId));
+                var result = await http.GetStringAsync(string.Format(AppData.ContentInfoUrl, contentId));
                 await WriteToFile("cached", contentId.ToString());
-                return str;
+                return result;
             }
             catch { return string.Empty; }
         }

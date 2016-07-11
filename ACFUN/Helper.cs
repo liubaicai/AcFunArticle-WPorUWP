@@ -926,13 +926,13 @@ namespace ACFUN
                 }
                 else
                 {
-                    var request = (HttpWebRequest)WebRequest.Create(new Uri("http://api.acfun.tv/apiserver/content/info?contentId=" + StaticData.acitem.href.Remove(0, 5)));
+                    var request = (HttpWebRequest)WebRequest.Create(new Uri("http://api.aixifan.com/contents/" + StaticData.acitem.href.Remove(0, 5)));
                     request.UserAgent = @"Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)";
                     request.Headers["deviceType"] = "1";
                     var response = await request.GetResponseAsync();
                     var sr = new StreamReader(response.GetResponseStream());
                     var obj = JObject.Parse(sr.ReadToEnd());
-                    await WriteToFile(obj["data"]["fullArticle"]["txt"].ToString(), filename);
+                    await WriteToFile(obj["data"]["article"]["content"].ToString(), filename);
                     result = await ReadFile(filename);
                 }
 
